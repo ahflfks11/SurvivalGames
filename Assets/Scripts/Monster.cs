@@ -26,8 +26,7 @@ public class Monster : MonoBehaviour
         _CorutinTime = new WaitForFixedUpdate();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
         _RecentHP = _Data._HP;
         _rigid = transform.GetComponent<Rigidbody2D>();

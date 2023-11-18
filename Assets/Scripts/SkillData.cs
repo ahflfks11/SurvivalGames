@@ -5,7 +5,9 @@ using UnityEngine;
 public enum WeaponType
 {
     효과없음,
-    관통
+    관통,
+    오른쪽공격,
+    왼쪽공격
 };
 
 [System.Serializable]
