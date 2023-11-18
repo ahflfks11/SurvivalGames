@@ -8,6 +8,7 @@ public struct Data
     public float _HP;
     public string _Monster_Name;
     public float _Speed;
+    public float _Resistance; // ÀúÇ×µµ, ³·À»¼ö·Ï ´ú ¹Ð¸².
 }
 public class Monster : MonoBehaviour
 {
@@ -69,7 +70,7 @@ public class Monster : MonoBehaviour
         yield return _CorutinTime;
         Vector3 playerPos = MapManager.instance._player.transform.position;
         Vector3 dirVec = transform.position - playerPos;
-        _rigid.AddForce(dirVec.normalized * 3, ForceMode2D.Impulse);
+        _rigid.AddForce(dirVec.normalized * _Data._Resistance, ForceMode2D.Impulse);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

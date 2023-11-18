@@ -4935,6 +4935,7 @@ MonoBehaviour:
     _HP: 2
     _Monster_Name: "\uADF8\uB9B0 \uC2AC\uB77C\uC784"
     _Speed: 1.5
+    _Resistance: 5
 --- !u!114 &9002819688718974964
 MonoBehaviour:
   m_ObjectHideFlags: 0
