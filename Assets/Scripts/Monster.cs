@@ -31,6 +31,7 @@ public class Monster : MonoBehaviour
         _RecentHP = _Data._HP;
         _rigid = transform.GetComponent<Rigidbody2D>();
         _AniController = transform.GetComponent<Animator>();
+        MF_AutoPool.InitializeSpawn(MapManager.instance._Coin, 0, 0);
     }
 
     private void FixedUpdate()
@@ -44,6 +45,7 @@ public class Monster : MonoBehaviour
             if (_AniController.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f)
             {
                 MapManager.instance.MobManager.poolBlock.size -= 1;
+                GameObject _Coin = MF_AutoPool.Spawn(MapManager.instance._Coin, transform.position, Quaternion.identity);
                 Destroy(this.gameObject);
             }
             else

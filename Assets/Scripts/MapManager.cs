@@ -9,6 +9,8 @@ public class MapManager : MonoBehaviour
     public AP_Pool WeaponManager;
     public AP_Pool MobManager;
     public RuleTile _MapTileSet;
+    public GameObject _Coin;
+
     private void Awake()
     {
         instance = this;
