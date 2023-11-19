@@ -6,7 +6,9 @@ using UnityEngine;
 public struct Data
 {
     public float _HP;
-    public string _Monster_Name;
+    public MapManager.MonsterType _MonsterType;
+    [Range(1f, 20f)]
+    public float _Damage;
     public float _Speed;
     public float _Resistance; // ÀúÇ×µµ, ³·À»¼ö·Ï ´ú ¹Ð¸².
 }
@@ -28,10 +30,11 @@ public class Monster : MonoBehaviour
 
     private void OnEnable()
     {
-        _RecentHP = _Data._HP;
+        _RecentHP = _Data._HP + MapManager.instance.Min;
         _rigid = transform.GetComponent<Rigidbody2D>();
         _AniController = transform.GetComponent<Animator>();
-        MF_AutoPool.InitializeSpawn(MapManager.instance._Coin, 0, 0);
+        //Coin
+        MF_AutoPool.InitializeSpawn(MapManager.instance.items[0].gameObject, 0, 0);
     }
 
     private void FixedUpdate()
@@ -44,8 +47,8 @@ public class Monster : MonoBehaviour
         {
             if (_AniController.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f)
             {
-                MapManager.instance.MobManager.poolBlock.size -= 1;
-                GameObject _Coin = MF_AutoPool.Spawn(MapManager.instance._Coin, transform.position, Quaternion.identity);
+                MapManager.instance.MobManager[(int)_Data._MonsterType].poolBlock.size -= 1;
+                GameObject _Coin = MF_AutoPool.Spawn(MapManager.instance.items[0].gameObject, transform.position, Quaternion.identity);
                 Destroy(this.gameObject);
             }
             else

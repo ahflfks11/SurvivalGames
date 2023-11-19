@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
     VariableJoystick _Joystick;
     float _posX;
     float _posY;
-    [SerializeField][Range(0,30)]
     float _speed;
     Vector2 moveDir;
 
@@ -23,11 +22,14 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody2D _rigid;
     public Transform[] _SpawnPoint;
-    
+
+    CharaterData _CharacterData;
+
     public Vector2 MoveDir { get => moveDir; set => moveDir = value; }
     public float PosX { get => _posX; set => _posX = value; }
     public Scanner Scanner { get => _scanner; set => _scanner = value; }
     public Rigidbody2D Rigid { get => _rigid; set => _rigid = value; }
+    public CharaterData CharacterData { get => _CharacterData; set => _CharacterData = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +39,11 @@ public class PlayerController : MonoBehaviour
         _rigid = transform.GetComponentInChildren<Rigidbody2D>();
         _SpawnPoint = GameObject.Find("Spawner").GetComponentsInChildren<Transform>();
         _SpawnPoint = _SpawnPoint.RemoveAt<Transform>(0);
+        CharacterData = transform.GetComponentInChildren<CharaterData>();
+        _speed = CharacterData.Stat.Speed;
+
+        if (Application.platform != RuntimePlatform.Android)
+            _Joystick.gameObject.SetActive(false);
     }
 
     // Update is called once per frame

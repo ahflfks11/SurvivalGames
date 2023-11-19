@@ -5016,8 +5016,8 @@ Transform:
   m_GameObject: {fileID: 2233689963322779177}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2233689962251533388}
   - {fileID: 7801204700191352248}
@@ -5107,7 +5107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Data:
     _HP: 3
-    _Monster_Name: "\uBE68\uAC04 \uC2AC\uB77C\uC784"
+    _MonsterType: 1
     _Speed: 1
     _Resistance: 3
 --- !u!114 &4821020714685372153

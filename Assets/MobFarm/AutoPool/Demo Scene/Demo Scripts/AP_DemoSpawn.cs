@@ -15,6 +15,9 @@ public class AP_DemoSpawn : MonoBehaviour {
 	public bool randomChild;
 	public int addToPool;
 	public int minPool;
+	//소환되는 시간
+	public int SpawnTime;
+	public int SpawnTimeMax;
 	public float spawnInterval;
 	public float spawnVelocity;
 	public float spawnAngleError;
@@ -32,6 +35,12 @@ public class AP_DemoSpawn : MonoBehaviour {
 			return;
 
 		if (MapManager.instance._player.Scanner.nearestTarget == null && _Type == SpawnType.Weapon)
+			return;
+
+		if (MapManager.instance.Min < SpawnTime)
+			return;
+
+		if (SpawnTimeMax != 0 && MapManager.instance.Min >= SpawnTimeMax)
 			return;
 
 		if ( Time.time >= nextSpawn ) {

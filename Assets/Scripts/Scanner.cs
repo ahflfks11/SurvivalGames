@@ -5,14 +5,29 @@ using UnityEngine;
 public class Scanner : MonoBehaviour
 {
     public float scanRange;
+    public float itemScanRange;
+    public float DropSpeed;
     public LayerMask targetLayer;
+    public LayerMask itemLayer;
     public RaycastHit2D[] targets;
+    public RaycastHit2D[] ItemScan;
     public Transform nearestTarget;
 
-    private void Update()
+    private void LateUpdate()
     {
-        targets = Physics2D.CircleCastAll(transform.localPosition, scanRange, Vector2.zero, 0, targetLayer);
+        targets = Physics2D.CircleCastAll(transform.position, scanRange, Vector2.zero, 0, targetLayer);
+        ItemScan = Physics2D.CircleCastAll(transform.position, itemScanRange, Vector2.zero, 0, itemLayer);
         nearestTarget = GetNearest();
+        //if (ItemScan.Length != 0)
+            //GetCoin();
+    }
+
+    public void GetCoin()
+    {
+        foreach(RaycastHit2D item in ItemScan)
+        {
+            item.transform.position = Vector3.MoveTowards(item.transform.position, transform.position, DropSpeed * Time.deltaTime);
+        }
     }
 
     Transform GetNearest()
