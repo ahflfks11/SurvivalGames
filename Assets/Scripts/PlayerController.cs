@@ -1,6 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+public static class Extensions
+{
+    public static T[] RemoveAt<T>(this T[] source, int index)
+    {
+        return source.Where((_, i) => i != index).ToArray();
+    }
+}
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,6 +22,7 @@ public class PlayerController : MonoBehaviour
     Scanner _scanner;
 
     Rigidbody2D _rigid;
+    public Transform[] _SpawnPoint;
     
     public Vector2 MoveDir { get => moveDir; set => moveDir = value; }
     public float PosX { get => _posX; set => _posX = value; }
@@ -26,6 +35,8 @@ public class PlayerController : MonoBehaviour
         _Joystick = GameObject.FindAnyObjectByType<VariableJoystick>();
         _scanner = GameObject.FindAnyObjectByType<Scanner>();
         _rigid = transform.GetComponentInChildren<Rigidbody2D>();
+        _SpawnPoint = GameObject.Find("Spawner").GetComponentsInChildren<Transform>();
+        _SpawnPoint = _SpawnPoint.RemoveAt<Transform>(0);
     }
 
     // Update is called once per frame
