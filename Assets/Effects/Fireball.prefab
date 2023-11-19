@@ -4900,6 +4900,7 @@ MonoBehaviour:
     _Damage: 1
     Speed: 2.7
     Power: 5
+  _WeaponType: 0
 --- !u!50 &752285869093431615
 Rigidbody2D:
   serializedVersion: 4

@@ -7,7 +7,11 @@ public enum WeaponType
     효과없음,
     관통,
     오른쪽공격,
-    왼쪽공격
+    왼쪽공격,
+    위로공격,
+    아래로공격,
+    갈래공격,
+    세갈래공격
 };
 
 [System.Serializable]
@@ -41,12 +45,31 @@ public class SkillData : MonoBehaviour
     private void OnEnable()
     {
         _rigid = transform.GetComponent<Rigidbody2D>();
-        _dir = MapManager.instance._player.Scanner.nearestTarget.position;
-        _WeaponDir = _dir - transform.position;
-        _WeaponDir = _WeaponDir.normalized;
+        if (Data.WeaponType == WeaponType.관통 || Data.WeaponType == WeaponType.갈래공격 || Data.WeaponType == WeaponType.세갈래공격)
+        {
+            _dir = MapManager.instance._player.Scanner.nearestTarget.position;
+            _WeaponDir = _dir - transform.position;
+            _WeaponDir = _WeaponDir.normalized;
 
-        transform.rotation = Quaternion.FromToRotation(Vector3.up, _WeaponDir);
-        _rigid.velocity = _WeaponDir.normalized * Data.Power;
+            transform.rotation = Quaternion.FromToRotation(Vector3.up, _WeaponDir);
+            _rigid.velocity = _WeaponDir.normalized * Data.Power;
+        }
+        else if (Data.WeaponType == WeaponType.오른쪽공격)
+        {
+            _rigid.velocity = Vector2.right * Data.Power;
+        }
+        else if (Data.WeaponType == WeaponType.왼쪽공격)
+        {
+            _rigid.velocity = Vector2.left * Data.Power;
+        }
+        else if (Data.WeaponType == WeaponType.위로공격)
+        {
+            _rigid.velocity = Vector2.up * Data.Power;
+        }
+        else if (Data.WeaponType == WeaponType.아래로공격)
+        {
+            _rigid.velocity = Vector2.down * Data.Power;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
