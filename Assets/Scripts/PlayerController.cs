@@ -16,6 +16,10 @@ public class PlayerController : MonoBehaviour
     float _posX;
     float _posY;
     float _speed;
+    public float _RecentHP;
+    public float _RecentEXP;
+    public int _level;
+
     Vector2 moveDir;
 
     Scanner _scanner;
@@ -24,6 +28,8 @@ public class PlayerController : MonoBehaviour
     public Transform[] _SpawnPoint;
 
     CharaterData _CharacterData;
+
+    public float[] _ExpList;
 
     public Vector2 MoveDir { get => moveDir; set => moveDir = value; }
     public float PosX { get => _posX; set => _posX = value; }
@@ -44,11 +50,20 @@ public class PlayerController : MonoBehaviour
 
         if (Application.platform != RuntimePlatform.Android)
             _Joystick.gameObject.SetActive(false);
+
+        _RecentEXP = 0;
+        _level = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (_RecentEXP >= _ExpList[_level])
+        {
+            _RecentEXP = 0;
+            _level++;
+        }
+
         if (Application.platform == RuntimePlatform.Android)
         {
             PosX = _Joystick.Horizontal;

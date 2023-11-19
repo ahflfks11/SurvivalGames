@@ -13,6 +13,7 @@ public struct Data
     public float _Resistance; // 저항도, 낮을수록 덜 밀림.
     public int SpawnLevel;
     public int SpawnLimitLevel; //특정 레벨 이상부터는 스폰이 되지 않는다.
+    public int exp;
 }
 public class Monster : MonoBehaviour
 {
@@ -54,6 +55,7 @@ public class Monster : MonoBehaviour
             {
                 MapManager.instance.MobManager[(int)Data._MonsterType].poolBlock.size -= 1;
                 GameObject _Coin = MF_AutoPool.Spawn(MapManager.instance.items[0].gameObject, transform.position, Quaternion.identity);
+                _Coin.GetComponent<Item>()._exp = _Data.exp;
                 Destroy(this.gameObject);
             }
             else

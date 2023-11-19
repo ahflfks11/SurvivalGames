@@ -5113,6 +5113,7 @@ MonoBehaviour:
     _Resistance: 3
     SpawnLevel: 2
     SpawnLimitLevel: 0
+    exp: 2
 --- !u!114 &4821020714685372153
 MonoBehaviour:
   m_ObjectHideFlags: 0
