@@ -5108,8 +5108,11 @@ MonoBehaviour:
   _Data:
     _HP: 3
     _MonsterType: 1
+    _Damage: 2
     _Speed: 1
     _Resistance: 3
+    SpawnLevel: 2
+    SpawnLimitLevel: 0
 --- !u!114 &4821020714685372153
 MonoBehaviour:
   m_ObjectHideFlags: 0

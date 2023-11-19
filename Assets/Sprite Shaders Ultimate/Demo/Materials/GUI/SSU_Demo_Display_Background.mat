@@ -2,16 +2,24 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SSU_Demo_Display_Background
   m_Shader: {fileID: 4800000, guid: bb134d7d4389e3a45a6c49e898a344a4, type: 3}
-  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA _ADDCOLORCONTRASTTOGGLE_ON _ENABLEENCHANTED_ON
-    _ENABLEINKSPREAD_ON _ENABLERAINBOW_ON _ENCHANTEDLERPTOGGLE_ON _ENCHANTEDRAINBOWTOGGLE_ON
-    _SHADERFADING_NONE _SHADERSPACE_UV
+  m_ValidKeywords:
+  - _ADDCOLORCONTRASTTOGGLE_ON
+  - _ENABLEENCHANTED_ON
+  - _ENABLEINKSPREAD_ON
+  - _ENABLERAINBOW_ON
+  - _ENCHANTEDLERPTOGGLE_ON
+  - _ENCHANTEDRAINBOWTOGGLE_ON
+  - _SHADERFADING_NONE
+  - _SHADERSPACE_UV
+  m_InvalidKeywords:
+  - ETC1_EXTERNAL_ALPHA
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -61,7 +69,15 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _RecolorRGBTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _RecolorRGBTintAreas:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RecolorRGBYCPTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -93,6 +109,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - PixelSnap: 0
     - _AddColorContrast: 1
@@ -185,6 +202,7 @@ Material:
     - _EnableInkSpread: 1
     - _EnableInnerOutline: 0
     - _EnableMetal: 0
+    - _EnableNegative: 0
     - _EnableOuterOutline: 0
     - _EnablePingPongGlow: 0
     - _EnablePixelOutline: 0
@@ -287,6 +305,7 @@ Material:
     - _MetalHighlightContrast: 2
     - _MetalHighlightDensity: 1
     - _MetalMaskToggle: 0
+    - _NegativeFade: 1
     - _OuterOutlineDistortionToggle: 0
     - _OuterOutlineFade: 1
     - _OuterOutlineOutlineOnlyToggle: 0
@@ -318,7 +337,9 @@ Material:
     - _RainbowSaturation: 1
     - _RainbowSpeed: 0.5
     - _RecolorRGBFade: 1
+    - _RecolorRGBTextureToggle: 0
     - _RecolorRGBYCPFade: 1
+    - _RecolorRGBYCPTextureToggle: 0
     - _RectHeight: 100
     - _RectWidth: 100
     - _Saturation: 1

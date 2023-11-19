@@ -8,6 +8,8 @@ TagManager:
   - Area
   - Weapon
   - Monster
+  - WeaponPool
+  - MonsterPool
   layers:
   - Default
   - TransparentFX

@@ -15,9 +15,8 @@ public class AP_DemoSpawn : MonoBehaviour {
 	public bool randomChild;
 	public int addToPool;
 	public int minPool;
-	//소환되는 시간
-	public int SpawnTime;
-	public int SpawnTimeMax;
+	int SpawnTime;
+	int SpawnTimeMax;
 	public float spawnInterval;
 	public float spawnVelocity;
 	public float spawnAngleError;
@@ -30,7 +29,16 @@ public class AP_DemoSpawn : MonoBehaviour {
 		MF_AutoPool.InitializeSpawn( spawnPrefab, addToPool, minPool );
 	}
 
-	void Update () {
+    private void OnEnable()
+    {
+		if (_Type == SpawnType.Monster)
+		{
+			SpawnTime = spawnPrefab.GetComponent<Monster>().Data.SpawnLevel;
+			SpawnTimeMax = spawnPrefab.GetComponent<Monster>().Data.SpawnLimitLevel;
+		}
+	}
+
+    void Update () {
 		if (spawnPrefab == null)
 			return;
 
@@ -40,8 +48,11 @@ public class AP_DemoSpawn : MonoBehaviour {
 		if (MapManager.instance.Min < SpawnTime)
 			return;
 
-		if (SpawnTimeMax != 0 && MapManager.instance.Min >= SpawnTimeMax)
-			return;
+		if (_Type == SpawnType.Monster)
+		{
+			if (SpawnTimeMax != 0 && MapManager.instance.Min >= SpawnTimeMax)
+				return;
+		}
 
 		if ( Time.time >= nextSpawn ) {
 

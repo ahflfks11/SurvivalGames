@@ -26,6 +26,7 @@ public class SkillData : MonoBehaviour
     [SerializeField]
     DB Data;
 
+    public MapManager.WeaponType _WeaponType;
     Vector3 _dir = Vector3.zero;
     Rigidbody2D _rigid;
     Vector3 _WeaponDir;
@@ -33,7 +34,7 @@ public class SkillData : MonoBehaviour
 
     public void DestoryPrefab()
     {
-        MapManager.instance.WeaponManager.poolBlock.size -= 1;
+        MapManager.instance.WeaponManager[(int)_WeaponType].poolBlock.size -= 1;
         Destroy(this.gameObject);
     }
 
@@ -53,7 +54,7 @@ public class SkillData : MonoBehaviour
         if (!collision.CompareTag("Monster"))
             return;
 
-        if (MapManager.instance.WeaponManager.poolBlock.size >= 1 && Data1.WeaponType == WeaponType.효과없음)
+        if (MapManager.instance.WeaponManager[(int)_WeaponType].poolBlock.size >= 1 && Data1.WeaponType == WeaponType.효과없음)
             DestoryPrefab();
     }
 }

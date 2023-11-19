@@ -11,6 +11,8 @@ public struct Data
     public float _Damage;
     public float _Speed;
     public float _Resistance; // 저항도, 낮을수록 덜 밀림.
+    public int SpawnLevel;
+    public int SpawnLimitLevel; //특정 레벨 이상부터는 스폰이 되지 않는다.
 }
 public class Monster : MonoBehaviour
 {
@@ -23,6 +25,9 @@ public class Monster : MonoBehaviour
     Rigidbody2D _rigid;
     Animator _AniController;
     WaitForFixedUpdate _CorutinTime;
+
+    public Data Data { get => _Data; set => _Data = value; }
+
     private void Awake()
     {
         _CorutinTime = new WaitForFixedUpdate();
@@ -30,7 +35,7 @@ public class Monster : MonoBehaviour
 
     private void OnEnable()
     {
-        _RecentHP = _Data._HP + MapManager.instance.Min;
+        _RecentHP = Data._HP + MapManager.instance.Min;
         _rigid = transform.GetComponent<Rigidbody2D>();
         _AniController = transform.GetComponent<Animator>();
         //Coin
@@ -47,7 +52,7 @@ public class Monster : MonoBehaviour
         {
             if (_AniController.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f)
             {
-                MapManager.instance.MobManager[(int)_Data._MonsterType].poolBlock.size -= 1;
+                MapManager.instance.MobManager[(int)Data._MonsterType].poolBlock.size -= 1;
                 GameObject _Coin = MF_AutoPool.Spawn(MapManager.instance.items[0].gameObject, transform.position, Quaternion.identity);
                 Destroy(this.gameObject);
             }
@@ -56,7 +61,7 @@ public class Monster : MonoBehaviour
         }
 
         Vector2 dirVec = MapManager.instance._player.Rigid.position - _rigid.position;
-        Vector2 nextVec = dirVec.normalized * _Data._Speed * Time.fixedDeltaTime;
+        Vector2 nextVec = dirVec.normalized * Data._Speed * Time.fixedDeltaTime;
         _rigid.MovePosition(_rigid.position + nextVec);
         _rigid.velocity = Vector2.zero;
     }
@@ -74,7 +79,7 @@ public class Monster : MonoBehaviour
         yield return _CorutinTime;
         Vector3 playerPos = MapManager.instance._player.transform.position;
         Vector3 dirVec = transform.position - playerPos;
-        _rigid.AddForce(dirVec.normalized * _Data._Resistance, ForceMode2D.Impulse);
+        _rigid.AddForce(dirVec.normalized * Data._Resistance, ForceMode2D.Impulse);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
