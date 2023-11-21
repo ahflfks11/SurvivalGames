@@ -11,8 +11,7 @@ public enum WeaponType
     위로공격,
     아래로공격,
     갈래공격,
-    세갈래공격,
-    제자리_다단공격
+    세갈래공격
 };
 
 [System.Serializable]
@@ -35,8 +34,6 @@ public class SkillData : MonoBehaviour
     Vector3 _dir = Vector3.zero;
     Rigidbody2D _rigid;
     Vector3 _WeaponDir;
-
-    public float _AttackTime;
     public DB Data1 { get => Data; set => Data = value; }
 
     public void DestoryPrefab()
@@ -72,19 +69,6 @@ public class SkillData : MonoBehaviour
         else if (Data.WeaponType == WeaponType.아래로공격)
         {
             _rigid.velocity = Vector2.down * Data.Power;
-        }
-        else if (Data.WeaponType == WeaponType.제자리_다단공격)
-        {
-
-        }
-    }
-
-    IEnumerator AttackLauncher()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(_AttackTime);
-            
         }
     }
 
