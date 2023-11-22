@@ -84,12 +84,9 @@ public class Monster : MonoBehaviour
         _rigid.AddForce(dirVec.normalized * Data._Resistance, ForceMode2D.Impulse);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void HitDamage(float _dmg)
     {
-        if (!collision.CompareTag("Weapon"))
-            return;
-
-        _RecentHP -= collision.GetComponent<SkillData>().Data1._Damage;
+        _RecentHP -= _dmg;
 
         if (_RecentHP > 0)
         {
@@ -100,5 +97,16 @@ public class Monster : MonoBehaviour
         {
             _AniController.SetTrigger("Death");
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Weapon"))
+            return;
+
+        if (collision.GetComponent<SkillData>().Data1._SpecialAttack)
+            return;
+
+        HitDamage(collision.GetComponent<SkillData>().Data1._Damage);
     }
 }

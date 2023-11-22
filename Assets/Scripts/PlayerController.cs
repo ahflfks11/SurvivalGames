@@ -61,7 +61,8 @@ public class PlayerController : MonoBehaviour
         if (_RecentEXP >= _ExpList[_level])
         {
             _RecentEXP = 0;
-            _level++;
+            if (_level < _ExpList.Length)
+                _level++;
         }
 
         if (Application.platform == RuntimePlatform.Android)

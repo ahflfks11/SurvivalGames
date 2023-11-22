@@ -11,7 +11,8 @@ public enum WeaponType
     위로공격,
     아래로공격,
     갈래공격,
-    세갈래공격
+    세갈래공격,
+    제자리_다단공격
 };
 
 [System.Serializable]
@@ -23,6 +24,9 @@ public struct DB
     public float Speed;
     [Range(1f, 10f)]
     public float Power;
+    public bool _SpecialAttack;
+    public float _attackRange;
+    public LayerMask targetLayer;
 }
 
 public class SkillData : MonoBehaviour
@@ -33,7 +37,9 @@ public class SkillData : MonoBehaviour
     public MapManager.WeaponType _WeaponType;
     Vector3 _dir = Vector3.zero;
     Rigidbody2D _rigid;
+    BoxCollider2D _col;
     Vector3 _WeaponDir;
+    RaycastHit2D[] _targets;
     public DB Data1 { get => Data; set => Data = value; }
 
     public void DestoryPrefab()
@@ -45,6 +51,7 @@ public class SkillData : MonoBehaviour
     private void OnEnable()
     {
         _rigid = transform.GetComponent<Rigidbody2D>();
+        _col = transform.GetComponent<BoxCollider2D>();
         if (Data.WeaponType == WeaponType.관통 || Data.WeaponType == WeaponType.갈래공격 || Data.WeaponType == WeaponType.세갈래공격)
         {
             _dir = MapManager.instance._player.Scanner.nearestTarget.position;
@@ -69,6 +76,25 @@ public class SkillData : MonoBehaviour
         else if (Data.WeaponType == WeaponType.아래로공격)
         {
             _rigid.velocity = Vector2.down * Data.Power;
+        }
+        else if (Data.WeaponType == WeaponType.제자리_다단공격)
+        {
+            StartCoroutine(Launcher());
+            transform.SetParent(MapManager.instance._player.transform);
+            transform.localPosition = Vector3.zero;
+        }
+    }
+
+    IEnumerator Launcher()
+    {
+        while (true)
+        {
+            _targets = Physics2D.CircleCastAll(transform.position, Data._attackRange, Vector2.zero, 0, Data.targetLayer);
+            for (int i = 0; i < _targets.Length; i++)
+            {
+                _targets[i].collider.GetComponent<Monster>().HitDamage(Data._Damage);
+            }
+            yield return new WaitForSeconds(0.01f);
         }
     }
 
