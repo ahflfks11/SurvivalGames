@@ -5047,10 +5047,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Data:
-    _HP: 8
+    _HP: 12
     _MonsterType: 2
     _Damage: 3
-    _Speed: 1
+    _Speed: 4
     _Resistance: 1
     SpawnLevel: 4
     SpawnLimitLevel: 0
