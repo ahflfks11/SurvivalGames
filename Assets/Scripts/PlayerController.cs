@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     float _posY;
     float _speed;
     public float _RecentHP;
+    public float _MaxHP;
     public float _RecentEXP;
     public int _level;
 
@@ -26,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody2D _rigid;
     public Transform[] _SpawnPoint;
-
+    public GameObject _WeaponSpawner;
     CharaterData _CharacterData;
 
     public float[] _ExpList;
@@ -55,9 +56,54 @@ public class PlayerController : MonoBehaviour
         _level = 0;
     }
 
+    public bool AddSkill(MapManager.WeaponType _weaponType)
+    {
+        AP_DemoSpawn[] _SkillList = _WeaponSpawner.GetComponents<AP_DemoSpawn>();
+        AP_DemoSpawn _spawnerConfig = null;
+        GameObject _SkillPrefab = null;
+
+        if (_SkillList.Length != 0)
+        {
+            foreach (AP_DemoSpawn _Skill in _SkillList)
+            {
+                if(_Skill.spawnPrefab.GetComponent<SkillData>()._WeaponType == _weaponType)
+                {
+                    //Config
+                    return false;
+                }
+            }
+        }
+        _WeaponSpawner.AddComponent<AP_DemoSpawn>();
+        _spawnerConfig = _WeaponSpawner.GetComponent<AP_DemoSpawn>();
+
+        foreach (AP_Pool _Skill in MapManager.instance.WeaponManager)
+        {
+            if (_Skill.poolBlock.prefab.GetComponent<SkillData>()._WeaponType == _weaponType)
+            {
+                _SkillPrefab = _Skill.poolBlock.prefab;
+                break;
+            }
+        }
+
+        if (_SkillPrefab == null) return false;
+
+        _spawnerConfig.spawnPrefab = _SkillPrefab;
+        _spawnerConfig._Type = SpawnType.Weapon;
+        _spawnerConfig.randomChild = true;
+        _spawnerConfig.spawnInterval = 1;
+
+        return true;
+
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            AddSkill(MapManager.WeaponType.Fireball);
+        }
+
         if (_RecentEXP >= _ExpList[_level])
         {
             _RecentEXP = 0;

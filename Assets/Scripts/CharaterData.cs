@@ -17,6 +17,7 @@ public class CharaterData : MonoBehaviour
     private CharacterStat _Stat;
     Animator _AniController;
     PlayerController _playerController;
+    Rigidbody2D _rigid;
 
     public CharacterStat Stat { get => _Stat; set => _Stat = value; }
 
@@ -25,6 +26,9 @@ public class CharaterData : MonoBehaviour
     {
         _AniController = transform.GetComponent<Animator>();
         _playerController = transform.GetComponentInParent<PlayerController>();
+        _rigid = MapManager.instance._player.GetComponent<Rigidbody2D>();
+        _playerController._MaxHP = _Stat.Health;
+        _playerController._RecentHP = _Stat.Health;
     }
 
     // Update is called once per frame
@@ -47,5 +51,22 @@ public class CharaterData : MonoBehaviour
         {
             _AniController.SetBool("IsWalking", false);
         }
+    }
+
+    public void HitDamage(float _dmg)
+    {
+        _playerController._RecentHP -= _dmg;
+        if (_playerController._RecentHP > 0)
+        {
+
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag != "Monster")
+            return;
+        
+        HitDamage(collision.gameObject.GetComponent<Monster>().Data._Damage);
     }
 }

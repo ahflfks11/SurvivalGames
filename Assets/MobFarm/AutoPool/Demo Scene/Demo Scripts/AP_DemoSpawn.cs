@@ -31,16 +31,20 @@ public class AP_DemoSpawn : MonoBehaviour {
 
     private void OnEnable()
     {
-		if (_Type == SpawnType.Monster)
-		{
-			SpawnTime = spawnPrefab.GetComponent<Monster>().Data.SpawnLevel;
-			SpawnTimeMax = spawnPrefab.GetComponent<Monster>().Data.SpawnLimitLevel;
-		}
+
 	}
 
     void Update () {
 		if (spawnPrefab == null)
 			return;
+        else
+        {
+			if (_Type == SpawnType.Monster)
+			{
+				SpawnTime = spawnPrefab.GetComponent<Monster>().Data.SpawnLevel;
+				SpawnTimeMax = spawnPrefab.GetComponent<Monster>().Data.SpawnLimitLevel;
+			}
+		}
 
 		if (MapManager.instance._player.Scanner.nearestTarget == null && _Type == SpawnType.Weapon)
 			return;

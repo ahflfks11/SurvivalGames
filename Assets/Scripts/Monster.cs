@@ -109,20 +109,4 @@ public class Monster : MonoBehaviour
 
         HitDamage(collision.GetComponent<SkillData>().Data1._Damage, true);
     }
-
-    /*
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (!collision.CompareTag("Weapon"))
-            return;
-
-        if (!collision.GetComponent<SkillData>().Data1._SpecialAttack)
-            return;
-
-        if (!_AniController.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
-        {
-            HitDamage(collision.GetComponent<SkillData>().Data1._Damage, false);
-        }
-    }
-    */
 }
