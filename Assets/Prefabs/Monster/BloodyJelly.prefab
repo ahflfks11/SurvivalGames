@@ -5111,7 +5111,7 @@ MonoBehaviour:
     _Damage: 2
     _Speed: 1
     _Resistance: 3
-    SpawnLevel: 2
+    SpawnLevel: 0
     SpawnLimitLevel: 0
     exp: 2
 --- !u!114 &4821020714685372153

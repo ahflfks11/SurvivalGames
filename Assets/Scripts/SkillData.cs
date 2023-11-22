@@ -92,9 +92,9 @@ public class SkillData : MonoBehaviour
             _targets = Physics2D.CircleCastAll(transform.position, Data._attackRange, Vector2.zero, 0, Data.targetLayer);
             for (int i = 0; i < _targets.Length; i++)
             {
-                _targets[i].collider.GetComponent<Monster>().HitDamage(Data._Damage);
+                _targets[i].collider.GetComponent<Monster>().HitDamage(Data._Damage, false);
             }
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 

@@ -5047,7 +5047,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Data:
-    _HP: 5
+    _HP: 8
     _MonsterType: 2
     _Damage: 3
     _Speed: 1

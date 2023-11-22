@@ -84,14 +84,14 @@ public class Monster : MonoBehaviour
         _rigid.AddForce(dirVec.normalized * Data._Resistance, ForceMode2D.Impulse);
     }
 
-    public void HitDamage(float _dmg)
+    public void HitDamage(float _dmg, bool _KnockBack)
     {
         _RecentHP -= _dmg;
 
         if (_RecentHP > 0)
         {
             _AniController.SetTrigger("Hit");
-            StartCoroutine(KnockBack());
+            if (_KnockBack) StartCoroutine(KnockBack());
         }
         else
         {
@@ -107,6 +107,22 @@ public class Monster : MonoBehaviour
         if (collision.GetComponent<SkillData>().Data1._SpecialAttack)
             return;
 
-        HitDamage(collision.GetComponent<SkillData>().Data1._Damage);
+        HitDamage(collision.GetComponent<SkillData>().Data1._Damage, true);
     }
+
+    /*
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Weapon"))
+            return;
+
+        if (!collision.GetComponent<SkillData>().Data1._SpecialAttack)
+            return;
+
+        if (!_AniController.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
+        {
+            HitDamage(collision.GetComponent<SkillData>().Data1._Damage, false);
+        }
+    }
+    */
 }
