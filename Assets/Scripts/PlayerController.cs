@@ -73,8 +73,19 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+
         _WeaponSpawner.AddComponent<AP_DemoSpawn>();
-        _spawnerConfig = _WeaponSpawner.GetComponent<AP_DemoSpawn>();
+
+        AP_DemoSpawn[] SpawnTargets = _WeaponSpawner.GetComponents<AP_DemoSpawn>();
+
+        for (int i = 0; i < SpawnTargets.Length; i++)
+        {
+            if (SpawnTargets[i]._Type == SpawnType.None)
+            {
+                _spawnerConfig = SpawnTargets[i];
+                break;
+            }
+        }
 
         foreach (AP_Pool _Skill in MapManager.instance.WeaponManager)
         {
@@ -101,13 +112,13 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            AddSkill(MapManager.WeaponType.Fireball);
+            Debug.Log(AddSkill(MapManager.WeaponType.Fireball));
         }
 
         if (_RecentEXP >= _ExpList[_level])
         {
             _RecentEXP = 0;
-            if (_level < _ExpList.Length - 1) _level++;
+            if (_level < _ExpList.Length - 1) _level++; MapManager.instance._uiManager.Panel();
 
         }
 

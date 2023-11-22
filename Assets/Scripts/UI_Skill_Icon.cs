@@ -1,31 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public struct SkillType
 {
-    public MapManager.WeaponType _weaponType;
     public string _SkillName;
+    [Multiline(3)]
     public string _SkillComment;
-    public string _Level;
 }
 public class UI_Skill_Icon : MonoBehaviour
 {
-    [SerializeField]
-    private SkillType _type;
+    public MapManager.WeaponType _weaponType;
+    public Text _TitleLabel;
+    public Text _CommentLine;
 
-    public SkillType Type { get => _type; set => _type = value; }
-
-    // Start is called before the first frame update
-    void Start()
+    public void SettingText(string _Title, string Comment)
     {
-
+        _TitleLabel.text = _Title;
+        _CommentLine.text = Comment;
     }
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField]
+    private List<SkillType> _type;
+
+    public List<SkillType> Type { get => _type; set => _type = value; }
+
+    public void AddSkill()
     {
-        
+        MapManager.instance._player.AddSkill(_weaponType);
+        MapManager.instance._uiManager.Panel();
     }
 }

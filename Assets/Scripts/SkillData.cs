@@ -38,7 +38,7 @@ public class SkillData : MonoBehaviour
     Vector3 _dir = Vector3.zero;
     Rigidbody2D _rigid;
     BoxCollider2D _col;
-    Vector3 _WeaponDir;
+    Vector2 _WeaponDir;
     RaycastHit2D[] _targets;
     public DB Data1 { get => Data; set => Data = value; }
 
@@ -58,7 +58,8 @@ public class SkillData : MonoBehaviour
             _WeaponDir = _dir - transform.position;
             _WeaponDir = _WeaponDir.normalized;
 
-            transform.rotation = Quaternion.FromToRotation(Vector3.up, _WeaponDir);
+            transform.rotation = Quaternion.FromToRotation(Vector2.right, _WeaponDir);
+            //transform.LookAt(_WeaponDir);
             _rigid.velocity = _WeaponDir.normalized * Data.Power;
         }
         else if (Data.WeaponType == WeaponType.오른쪽공격)

@@ -4899,8 +4899,13 @@ MonoBehaviour:
     WeaponType: 1
     _Damage: 1
     Speed: 2.7
-    Power: 5
-  _WeaponType: 0
+    Power: 1.5
+    _SpecialAttack: 0
+    _attackRange: 0
+    targetLayer:
+      serializedVersion: 2
+      m_Bits: 0
+  _WeaponType: 1
 --- !u!50 &752285869093431615
 Rigidbody2D:
   serializedVersion: 4
@@ -4921,7 +4926,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &5790677251938409538
 GameObject:
   m_ObjectHideFlags: 0

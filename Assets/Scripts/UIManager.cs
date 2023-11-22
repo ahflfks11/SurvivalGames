@@ -5,10 +5,25 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public GameObject _UIPanel;
     public Text _TimerText;
     public Text _EXPText;
     public Slider _HPUI;
     public Slider _EXPUI;
+
+    public void Panel()
+    {
+        if (_UIPanel.activeSelf)
+        {
+            Time.timeScale = 1f;
+            _UIPanel.SetActive(false);
+        }
+        else
+        {
+            Time.timeScale = 0f;
+            _UIPanel.SetActive(true);
+        }
+    }
 
     // Update is called once per frame
     void Update()

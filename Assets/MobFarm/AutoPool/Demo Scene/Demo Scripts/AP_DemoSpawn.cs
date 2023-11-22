@@ -3,6 +3,7 @@ using System.Collections;
 
 public enum SpawnType
 {
+	None,
 	Monster,
 	Weapon,
 	Item
@@ -31,20 +32,15 @@ public class AP_DemoSpawn : MonoBehaviour {
 
     private void OnEnable()
     {
-
+        if (_Type == SpawnType.Monster)
+        {
+			SpawnTime = spawnPrefab.GetComponent<Monster>().Data.SpawnLevel;
+			SpawnTimeMax = spawnPrefab.GetComponent<Monster>().Data.SpawnLimitLevel;
+		}
 	}
 
     void Update () {
-		if (spawnPrefab == null)
-			return;
-        else
-        {
-			if (_Type == SpawnType.Monster)
-			{
-				SpawnTime = spawnPrefab.GetComponent<Monster>().Data.SpawnLevel;
-				SpawnTimeMax = spawnPrefab.GetComponent<Monster>().Data.SpawnLimitLevel;
-			}
-		}
+		if (spawnPrefab == null) return;
 
 		if (MapManager.instance._player.Scanner.nearestTarget == null && _Type == SpawnType.Weapon)
 			return;
@@ -80,7 +76,15 @@ public class AP_DemoSpawn : MonoBehaviour {
 						obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), transform.position + (spawnAngle * transform.forward), transform.rotation * spawnAngle);
 						obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z), transform.rotation * spawnAngle);
                     }
-                    else
+					else if (spawnPrefab.GetComponent<SkillData>().Data1.WeaponType == WeaponType.오른쪽공격)
+                    {
+						obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), transform.position + (spawnAngle * transform.forward), Quaternion.Euler(new Vector3(0, 0, 0)));
+					}
+					else if (spawnPrefab.GetComponent<SkillData>().Data1.WeaponType == WeaponType.왼쪽공격)
+					{
+						obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), transform.position + (spawnAngle * transform.forward), Quaternion.Euler(new Vector3(0, 180f, 0)));
+					}
+					else
                     {
 						obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), transform.position + (spawnAngle * transform.forward), transform.rotation * spawnAngle);
 					}

@@ -19,7 +19,10 @@ public class MapManager : MonoBehaviour
 
     public enum WeaponType
     {
-        Fireball = 0
+        NormalAttack = 0,
+        Fireball,
+        Magic_Lighting,
+        StarLight
     };
 
     public static MapManager instance;
