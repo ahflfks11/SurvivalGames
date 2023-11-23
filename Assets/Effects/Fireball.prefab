@@ -4899,7 +4899,7 @@ MonoBehaviour:
     WeaponType: 1
     _Damage: 1
     Speed: 2.7
-    Power: 1.5
+    Power: 2
     _SpecialAttack: 0
     _attackRange: 0
     targetLayer:
