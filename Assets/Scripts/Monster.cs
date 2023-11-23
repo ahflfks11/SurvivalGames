@@ -20,8 +20,10 @@ public class Monster : MonoBehaviour
     [SerializeField]
     Data _Data;
 
+    bool Knowback;
     float _RecentHP;
-
+    float _durationTime = 0.5f;
+    float _TempDurationTime = 0f;
     Rigidbody2D _target;
     Rigidbody2D _rigid;
     Animator _AniController;
@@ -45,11 +47,9 @@ public class Monster : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_AniController.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
-        {
-            return;
-        }
-        else if (_AniController.GetCurrentAnimatorStateInfo(0).IsName("Death"))
+        if (_TempDurationTime > 0) _TempDurationTime -= Time.fixedDeltaTime;
+        
+        if (_AniController.GetCurrentAnimatorStateInfo(0).IsName("Death"))
         {
             if (_AniController.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f)
             {
@@ -60,6 +60,10 @@ public class Monster : MonoBehaviour
             }
             else
                 return;
+        }
+        else
+        {
+            Knowback = false;
         }
 
         Vector2 dirVec = MapManager.instance._player.Rigid.position - _rigid.position;
@@ -78,6 +82,7 @@ public class Monster : MonoBehaviour
 
     IEnumerator KnockBack()
     {
+        Knowback = true;
         yield return _CorutinTime;
         Vector3 playerPos = MapManager.instance._player.transform.position;
         Vector3 dirVec = transform.position - playerPos;
@@ -90,8 +95,8 @@ public class Monster : MonoBehaviour
 
         if (_RecentHP > 0)
         {
-            _AniController.SetTrigger("Hit");
             if (_KnockBack) StartCoroutine(KnockBack());
+            _AniController.SetTrigger("Hit");
         }
         else
         {
@@ -108,5 +113,20 @@ public class Monster : MonoBehaviour
             return;
 
         HitDamage(collision.GetComponent<SkillData>().Data1._Damage, true);
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Weapon"))
+            return;
+
+        if (!collision.GetComponent<SkillData>().Data1._SpecialAttack)
+            return;
+
+        if(_TempDurationTime <= 0)
+        {
+            HitDamage(collision.GetComponent<SkillData>().Data1._Damage, false);
+            _TempDurationTime = _durationTime;
+        }
     }
 }

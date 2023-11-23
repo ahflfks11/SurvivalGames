@@ -69,6 +69,16 @@ public class PlayerController : MonoBehaviour
                 if(_Skill.spawnPrefab.GetComponent<SkillData>()._WeaponType == _weaponType)
                 {
                     //Config
+                    _Skill.Level++;
+                    for (int i = 0; i < MapManager.instance._skillList.Count; i++)
+                    {
+                        if (MapManager.instance._skillList[i]._skillPrefab == _Skill.spawnPrefab)
+                        {
+                            _Skill.WeaponNumber = (int)MapManager.instance._skillList[i]._skill[_Skill.Level]._weaponType;
+                            _Skill.Dmg = MapManager.instance._skillList[i]._skill[_Skill.Level]._Damage;
+                        }
+                    }
+
                     return false;
                 }
             }
@@ -97,7 +107,6 @@ public class PlayerController : MonoBehaviour
         }
 
         if (_SkillPrefab == null) return false;
-
         _spawnerConfig.spawnPrefab = _SkillPrefab;
         _spawnerConfig._Type = SpawnType.Weapon;
         _spawnerConfig.randomChild = true;

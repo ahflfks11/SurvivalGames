@@ -4932,7 +4932,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Data:
-    _HP: 1
+    _HP: 2
     _MonsterType: 0
     _Damage: 1
     _Speed: 1.5

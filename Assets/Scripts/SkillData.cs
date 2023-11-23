@@ -2,45 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum WeaponType
-{
-    효과없음,
-    관통,
-    오른쪽공격,
-    왼쪽공격,
-    위로공격,
-    아래로공격,
-    갈래공격,
-    세갈래공격,
-    제자리_다단공격
-};
 
-[System.Serializable]
-public struct DB
-{
-    public WeaponType WeaponType;
-    public float _Damage;
-    [Range(0.1f, 20f)]
-    public float Speed;
-    [Range(1f, 10f)]
-    public float Power;
-    public bool _SpecialAttack;
-    public float _attackRange;
-    public LayerMask targetLayer;
-}
+
+
 
 public class SkillData : MonoBehaviour
 {
+    public enum WeaponType
+    {
+        효과없음 = 0,
+        관통,
+        오른쪽공격,
+        왼쪽공격,
+        위로공격,
+        아래로공격,
+        갈래공격,
+        세갈래공격,
+        제자리_다단공격,
+        제자리_특수공격
+    };
+
+    [System.Serializable]
+    public struct DB
+    {
+        public WeaponType WeaponType;
+        public float _Damage;
+        [Range(0.1f, 20f)]
+        public float Speed;
+        [Range(1f, 10f)]
+        public float Power;
+        public bool _SpecialAttack;
+        public float _attackRange;
+        public LayerMask targetLayer;
+    }
+
     [SerializeField]
     DB Data;
-
+    float _dmg = -1f;
     public MapManager.WeaponType _WeaponType;
     Vector3 _dir = Vector3.zero;
     Rigidbody2D _rigid;
     BoxCollider2D _col;
     Vector2 _WeaponDir;
     RaycastHit2D[] _targets;
+
     public DB Data1 { get => Data; set => Data = value; }
+    public float Dmg { get => _dmg; set => _dmg = value; }
 
     public void DestoryPrefab()
     {
@@ -52,12 +59,12 @@ public class SkillData : MonoBehaviour
     {
         _rigid = transform.GetComponent<Rigidbody2D>();
         _col = transform.GetComponent<BoxCollider2D>();
+
         if (Data.WeaponType == WeaponType.관통 || Data.WeaponType == WeaponType.갈래공격 || Data.WeaponType == WeaponType.세갈래공격)
         {
             _dir = MapManager.instance._player.Scanner.nearestTarget.position;
             _WeaponDir = _dir - transform.position;
             _WeaponDir = _WeaponDir.normalized;
-
             transform.rotation = Quaternion.FromToRotation(Vector2.right, _WeaponDir);
             //transform.LookAt(_WeaponDir);
             _rigid.velocity = _WeaponDir.normalized * Data.Power;
@@ -80,10 +87,15 @@ public class SkillData : MonoBehaviour
         }
         else if (Data.WeaponType == WeaponType.제자리_다단공격)
         {
-            StartCoroutine(Launcher());
+            //StartCoroutine(Launcher());
             transform.SetParent(MapManager.instance._player.transform);
             transform.localPosition = Vector3.zero;
         }
+    }
+
+    public void Update()
+    {
+        if (Dmg != -1f) Data._Damage = Dmg;
     }
 
     IEnumerator Launcher()

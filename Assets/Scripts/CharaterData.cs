@@ -19,6 +19,9 @@ public class CharaterData : MonoBehaviour
     PlayerController _playerController;
     Rigidbody2D _rigid;
 
+    float _durationTime = 0.5f;
+    float _tempDurationTime = 0f;
+
     public CharacterStat Stat { get => _Stat; set => _Stat = value; }
 
     // Start is called before the first frame update
@@ -29,11 +32,14 @@ public class CharaterData : MonoBehaviour
         _rigid = MapManager.instance._player.GetComponent<Rigidbody2D>();
         _playerController._MaxHP = _Stat.Health;
         _playerController._RecentHP = _Stat.Health;
+        _playerController.AddSkill(MapManager.WeaponType.Fireball);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (_tempDurationTime > 0) _tempDurationTime -= Time.deltaTime;
+
         if (_playerController.MoveDir.sqrMagnitude != 0)
         {
             if (_playerController.PosX < 0)
@@ -62,11 +68,15 @@ public class CharaterData : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag != "Monster")
             return;
-        
-        HitDamage(collision.gameObject.GetComponent<Monster>().Data._Damage);
+
+        if (_tempDurationTime <= 0)
+        {
+            HitDamage(collision.gameObject.GetComponent<Monster>().Data._Damage);
+            _tempDurationTime = _durationTime;
+        }
     }
 }

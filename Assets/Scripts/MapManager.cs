@@ -22,8 +22,29 @@ public class MapManager : MonoBehaviour
         NormalAttack = 0,
         Fireball,
         Magic_Lighting,
-        StarLight
+        StarLight,
+        Moving_Weapon
     };
+
+    [System.Serializable]
+    public struct Skill
+    {
+        public string _SkillName;
+        [Multiline(3)]
+        public string _SkillComment;
+        public SkillData.WeaponType _weaponType;
+        public float _Damage;
+    }
+
+    [System.Serializable]
+    public struct SkillList
+    {
+        public Sprite _Icon;
+        public GameObject _skillPrefab;
+        public Skill[] _skill;
+        public double _Rarelity;
+        public bool _Non_Active;
+    }
 
     public static MapManager instance;
     public UIManager _uiManager;
@@ -34,6 +55,9 @@ public class MapManager : MonoBehaviour
     public RuleTile _MapTileSet;
     public Item[] items;
     public float _GameTime;
+
+    [SerializeField]
+    public List<SkillList> _skillList;
     int min;
     int sec;
 
