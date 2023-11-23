@@ -77,33 +77,25 @@ public class AP_DemoSpawn : MonoBehaviour {
 					if (_WeaponNumber == (int)SkillData.WeaponType.세갈래공격)
 					{
 						obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), transform.position + (spawnAngle * transform.forward), transform.rotation * spawnAngle);
-						obj.GetComponent<SkillData>().Dmg = _dmg;
 						obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z), transform.rotation * spawnAngle);
-						obj.GetComponent<SkillData>().Dmg = _dmg;
 						obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), new Vector3(transform.position.x + 1f, transform.position.y, transform.position.z), transform.rotation * spawnAngle);
-						obj.GetComponent<SkillData>().Dmg = _dmg;
 					}
                     else if (_WeaponNumber == (int)SkillData.WeaponType.갈래공격)
 					{
 						obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), transform.position + (spawnAngle * transform.forward), transform.rotation * spawnAngle);
-						obj.GetComponent<SkillData>().Dmg = _dmg;
 						obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z), transform.rotation * spawnAngle);
-						obj.GetComponent<SkillData>().Dmg = _dmg;
 					}
 					else if (_WeaponNumber == (int)SkillData.WeaponType.오른쪽공격)
                     {
 						obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), transform.position + (spawnAngle * transform.forward), Quaternion.Euler(new Vector3(0, 0, 0)));
-						obj.GetComponent<SkillData>().Dmg = _dmg;
 					}
 					else if (_WeaponNumber == (int)SkillData.WeaponType.왼쪽공격)
 					{
 						obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), transform.position + (spawnAngle * transform.forward), Quaternion.Euler(new Vector3(0, 180f, 0)));
-						obj.GetComponent<SkillData>().Dmg = _dmg;
 					}
 					else
                     {
 						obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), transform.position + (spawnAngle * transform.forward), transform.rotation * spawnAngle);
-						obj.GetComponent<SkillData>().Dmg = _dmg;
 					}
 				}
 				else if (_Type == SpawnType.Monster)

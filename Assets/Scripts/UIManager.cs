@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
             UI_Skill_Icon[] _Find_UI_Icon = GameObject.FindObjectsOfType<UI_Skill_Icon>();
 
             for (int i = 0; i < _Find_UI_Icon.Length; i++)
-                Destroy(_Find_UI_Icon[i]);
+                Destroy(_Find_UI_Icon[i].gameObject);
 
             _UIPanel.SetActive(false);
         }

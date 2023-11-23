@@ -22,7 +22,7 @@ public class Monster : MonoBehaviour
 
     bool Knowback;
     float _RecentHP;
-    float _durationTime = 0.5f;
+    float _durationTime = 0.02f;
     float _TempDurationTime = 0f;
     Rigidbody2D _target;
     Rigidbody2D _rigid;

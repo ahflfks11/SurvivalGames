@@ -116,19 +116,24 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void LevelUp()
+    {
+        _RecentEXP = 0;
+        _level++;
+        MapManager.instance._uiManager.Panel();
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            Debug.Log(AddSkill(MapManager.WeaponType.Fireball));
+            LevelUp();
         }
 
         if (_RecentEXP >= _ExpList[_level])
         {
-            _RecentEXP = 0;
-            if (_level < _ExpList.Length - 1) _level++; MapManager.instance._uiManager.Panel();
-
+            if (_level < _ExpList.Length - 1) LevelUp();
         }
 
         if (Application.platform == RuntimePlatform.Android)
