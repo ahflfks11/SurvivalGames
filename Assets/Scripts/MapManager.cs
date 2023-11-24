@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MapManager : MonoBehaviour
 {
@@ -23,7 +24,8 @@ public class MapManager : MonoBehaviour
         Fireball,
         Magic_Lighting,
         StarLight,
-        Moving_Weapon
+        Moving_Weapon,
+        Rocket
     };
 
     [System.Serializable]
@@ -77,23 +79,6 @@ public class MapManager : MonoBehaviour
     public int Min { get => min; set => min = value; }
     public int Sec { get => sec; set => sec = value; }
 
-    //무기 등록
-    public void Add_Weapon(WeaponType _weapon)
-    {
-        foreach (SkillList _skill in _skillList)
-        {
-            if (_skill._weapon == _weapon)
-            {
-                MySkillList _newSkill = new MySkillList();
-                _newSkill._weapon = _weapon;
-                _newSkill._skills = _skill._skill;
-                _newSkill.currectLevel = 0;
-                _MySkill.Add(_newSkill);
-                break;
-            }
-        }
-    }
-
     private void Awake()
     {
         instance = this;
@@ -119,6 +104,9 @@ public class MapManager : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+            LoadMap();
+
         _GameTime += Time.deltaTime;
 
         min = Mathf.FloorToInt(_GameTime / 60f);
@@ -131,5 +119,27 @@ public class MapManager : MonoBehaviour
             else
                 Time.timeScale = 1f;
         }
+    }
+
+    //무기 등록
+    public void Add_Weapon(WeaponType _weapon)
+    {
+        foreach (SkillList _skill in _skillList)
+        {
+            if (_skill._weapon == _weapon)
+            {
+                MySkillList _newSkill = new MySkillList();
+                _newSkill._weapon = _weapon;
+                _newSkill._skills = _skill._skill;
+                _newSkill.currectLevel = 0;
+                _MySkill.Add(_newSkill);
+                break;
+            }
+        }
+    }
+
+    public void LoadMap()
+    {
+        SceneManager.LoadScene(0);
     }
 }

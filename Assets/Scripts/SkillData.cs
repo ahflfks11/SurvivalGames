@@ -36,6 +36,7 @@ public class SkillData : MonoBehaviour
     DB Data;
     float _dmg = -1f;
     public MapManager.WeaponType _WeaponType;
+    [SerializeField]
     int _level = 0;
     Vector3 _dir = Vector3.zero;
     Rigidbody2D _rigid;

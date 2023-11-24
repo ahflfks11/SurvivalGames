@@ -21,8 +21,9 @@ public class CharaterData : MonoBehaviour
 
     float _durationTime = 0.5f;
     float _tempDurationTime = 0f;
-
+    bool _isAlive;
     public CharacterStat Stat { get => _Stat; set => _Stat = value; }
+    public bool IsAlive { get => _isAlive; set => _isAlive = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -32,12 +33,22 @@ public class CharaterData : MonoBehaviour
         _rigid = MapManager.instance._player.GetComponent<Rigidbody2D>();
         _playerController._MaxHP = _Stat.Health;
         _playerController._RecentHP = _Stat.Health;
-        Debug.Log(_playerController.AddSkill(MapManager.WeaponType.NormalAttack));
+        IsAlive = true;
+        _playerController.AddSkill(MapManager.WeaponType.NormalAttack);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (_AniController.GetCurrentAnimatorStateInfo(0).IsName("Death"))
+        {
+            if (_AniController.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95)
+            {
+                MapManager.instance.LoadMap();
+            }
+            return;
+        }
+
         if (_tempDurationTime > 0) _tempDurationTime -= Time.deltaTime;
 
         if (_playerController.MoveDir.sqrMagnitude != 0)
@@ -62,14 +73,19 @@ public class CharaterData : MonoBehaviour
     public void HitDamage(float _dmg)
     {
         _playerController._RecentHP -= _dmg;
-        if (_playerController._RecentHP > 0)
-        {
 
+        if (_playerController._RecentHP <= 0)
+        {
+            IsAlive = false;
+            _AniController.SetTrigger("Death");
         }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
+        if (!IsAlive)
+            return;
+
         if (collision.gameObject.tag != "Monster")
             return;
 

@@ -15,6 +15,9 @@ public class UIManager : MonoBehaviour
 
     public void Panel()
     {
+        if (!MapManager.instance._player.CharacterData.IsAlive)
+            return;
+
         if (_UIPanel.activeSelf)
         {
             Time.timeScale = 1f;
