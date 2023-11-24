@@ -81,6 +81,18 @@ public class CharaterData : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!IsAlive)
+            return;
+
+        if (collision.gameObject.tag != "Monster")
+            return;
+
+        HitDamage(collision.gameObject.GetComponent<Monster>().Data._Damage);
+        _tempDurationTime = _durationTime;
+    }
+
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (!IsAlive)
