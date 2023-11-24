@@ -82,7 +82,29 @@ public class PlayerController : MonoBehaviour
                     if (_Skill.Level < 4)
                     {
                         _Skill.Level++;
-                        _Skill.ShootingCounter = MapManager.instance._MySkill[i]._skills[_Skill.Level]._ShootingCOunter;
+
+                        if (MapManager.instance._MySkill[i]._skills[_Skill.Level]._ShootingCOunter != _Skill.ShootingCounter)
+                        {
+                            GameObject[] _skillPool = GameObject.FindGameObjectsWithTag("WeaponPool");
+                            AP_Pool _tempSkillPool = null;
+
+                            for (int j = 0; j < _skillPool.Length; j++)
+                            {
+                                if (_skillPool[j].GetComponent<AP_Pool>().poolBlock.prefab.GetComponent<SkillData>()._WeaponType == _weaponType)
+                                {
+                                    _tempSkillPool = _skillPool[j].GetComponent<AP_Pool>();
+                                    break;
+                                }
+                            }
+
+                            if (_tempSkillPool != null)
+                            {
+                                if (_tempSkillPool.poolBlock.maxSize < MapManager.instance._MySkill[i]._skills[_Skill.Level]._ShootingCOunter)
+                                    _tempSkillPool.poolBlock.maxSize++;
+
+                                _Skill.ShootingCounter = MapManager.instance._MySkill[i]._skills[_Skill.Level]._ShootingCOunter;
+                            }
+                        }
                     }
                 }
 
