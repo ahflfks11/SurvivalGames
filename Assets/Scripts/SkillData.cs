@@ -36,6 +36,7 @@ public class SkillData : MonoBehaviour
     DB Data;
     float _dmg = -1f;
     public MapManager.WeaponType _WeaponType;
+    int _level = 0;
     Vector3 _dir = Vector3.zero;
     Rigidbody2D _rigid;
     BoxCollider2D _col;
@@ -44,11 +45,24 @@ public class SkillData : MonoBehaviour
 
     public DB Data1 { get => Data; set => Data = value; }
     public float Dmg { get => _dmg; set => _dmg = value; }
+    public int Level { get => _level; set => _level = value; }
 
     public void DestoryPrefab()
     {
         MapManager.instance.WeaponManager[(int)_WeaponType].poolBlock.size -= 1;
         Destroy(this.gameObject);
+    }
+
+    private void Update()
+    {
+        for (int i = 0; i < MapManager.instance._MySkill.Count; i++)
+        {
+            if (MapManager.instance._MySkill[i]._weapon == _WeaponType)
+            {
+                Data._Damage = MapManager.instance._MySkill[i]._skills[MapManager.instance._MySkill[i].currectLevel]._Damage;
+                break;
+            }
+        }
     }
 
     private void OnEnable()

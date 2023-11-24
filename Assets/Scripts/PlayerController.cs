@@ -83,6 +83,12 @@ public class PlayerController : MonoBehaviour
                     {
                         _Skill.Level++;
 
+                        MapManager.MySkillList _tempSkill = new MapManager.MySkillList();
+                        _tempSkill._weapon = _weaponType;
+                        _tempSkill._skills = MapManager.instance._MySkill[i]._skills;
+                        _tempSkill.currectLevel = _Skill.Level;
+                        MapManager.instance._MySkill[i] = _tempSkill;
+
                         if (MapManager.instance._MySkill[i]._skills[_Skill.Level]._ShootingCOunter != _Skill.ShootingCounter)
                         {
                             GameObject[] _skillPool = GameObject.FindGameObjectsWithTag("WeaponPool");

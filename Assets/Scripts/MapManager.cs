@@ -53,6 +53,7 @@ public class MapManager : MonoBehaviour
     {
         public WeaponType _weapon;
         public Skill[] _skills;
+        public int currectLevel;
     }
 
     [SerializeField]
@@ -86,6 +87,7 @@ public class MapManager : MonoBehaviour
                 MySkillList _newSkill = new MySkillList();
                 _newSkill._weapon = _weapon;
                 _newSkill._skills = _skill._skill;
+                _newSkill.currectLevel = 0;
                 _MySkill.Add(_newSkill);
                 break;
             }
