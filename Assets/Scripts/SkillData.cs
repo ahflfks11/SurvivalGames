@@ -89,11 +89,6 @@ public class SkillData : MonoBehaviour
         }
     }
 
-    public void Update()
-    {
-        if (Dmg != -1f) Data._Damage = Dmg;
-    }
-
     IEnumerator Launcher()
     {
         while (true)

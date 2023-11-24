@@ -32,7 +32,7 @@ public class MapManager : MonoBehaviour
         public string _SkillName;
         [Multiline(3)]
         public string _SkillComment;
-        public SkillData.WeaponType _weaponType;
+        public WeaponType _weaponType;
         public int _ShootingCOunter;
         public float _Damage;
     }

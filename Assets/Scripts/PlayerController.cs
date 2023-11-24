@@ -68,10 +68,9 @@ public class PlayerController : MonoBehaviour
             {
                 AP_DemoSpawn[] SpawnList = _WeaponSpawner.GetComponents<AP_DemoSpawn>();
                 AP_DemoSpawn _Skill = null;
-
                 foreach (AP_DemoSpawn Ap_Skill in SpawnList)
                 {
-                    if (Ap_Skill.spawnPrefab.GetComponent<SkillData>().Data1.WeaponType == MapManager.instance._MySkill[i]._skills[Ap_Skill.Level]._weaponType)
+                    if (Ap_Skill.spawnPrefab.GetComponent<SkillData>()._WeaponType == MapManager.instance._MySkill[i]._skills[Ap_Skill.Level]._weaponType)
                     {
                         _Skill = Ap_Skill;
                         break;
@@ -80,11 +79,10 @@ public class PlayerController : MonoBehaviour
 
                 if (_Skill != null)
                 {
-                    if (MapManager.instance._MySkill[i]._skills.Length > _Skill.Level)
+                    if (_Skill.Level < 4)
                     {
                         _Skill.Level++;
                         _Skill.ShootingCounter = MapManager.instance._MySkill[i]._skills[_Skill.Level]._ShootingCOunter;
-                        Debug.Log("test");
                     }
                 }
 
@@ -121,7 +119,6 @@ public class PlayerController : MonoBehaviour
         _spawnerConfig._Type = SpawnType.Weapon;
         _spawnerConfig.randomChild = true;
         _spawnerConfig.spawnInterval = 1;
-        Debug.Log(MapManager.instance._MySkill.Count);
         return true;
 
     }

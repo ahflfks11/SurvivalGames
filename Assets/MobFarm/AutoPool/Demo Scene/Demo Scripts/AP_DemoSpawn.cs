@@ -16,6 +16,7 @@ public class AP_DemoSpawn : MonoBehaviour {
 	public bool randomChild;
 	public int addToPool;
 	public int minPool;
+	[SerializeField]
 	int _level;
 	int _WeaponNumber;
 	[SerializeField]
@@ -77,7 +78,7 @@ public class AP_DemoSpawn : MonoBehaviour {
 			{
 				for (int i = 0; i < _ShootingCounter; i++)
 				{
-					obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), new Vector3(transform.position.x - i, transform.position.y, transform.position.z), transform.rotation * spawnAngle);
+					obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), new Vector3(transform.position.x - i, transform.position.y, transform.position.z), spawnPrefab.transform.rotation * spawnAngle);
 				}
 			}
 			else if (_Type == SpawnType.Monster)
