@@ -33,6 +33,7 @@ public class MapManager : MonoBehaviour
         [Multiline(3)]
         public string _SkillComment;
         public SkillData.WeaponType _weaponType;
+        public int _ShootingCOunter;
         public float _Damage;
     }
 
@@ -41,10 +42,21 @@ public class MapManager : MonoBehaviour
     {
         public Sprite _Icon;
         public GameObject _skillPrefab;
+        public WeaponType _weapon;
         public Skill[] _skill;
         public double _Rarelity;
         public bool _Non_Active;
     }
+
+    [System.Serializable]
+    public struct MySkillList
+    {
+        public WeaponType _weapon;
+        public Skill[] _skills;
+    }
+
+    [SerializeField]
+    public List<MySkillList> _MySkill;
 
     public static MapManager instance;
     public UIManager _uiManager;
@@ -63,6 +75,22 @@ public class MapManager : MonoBehaviour
 
     public int Min { get => min; set => min = value; }
     public int Sec { get => sec; set => sec = value; }
+
+    //무기 등록
+    public void Add_Weapon(WeaponType _weapon)
+    {
+        foreach (SkillList _skill in _skillList)
+        {
+            if (_skill._weapon == _weapon)
+            {
+                MySkillList _newSkill = new MySkillList();
+                _newSkill._weapon = _weapon;
+                _newSkill._skills = _skill._skill;
+                _MySkill.Add(_newSkill);
+                break;
+            }
+        }
+    }
 
     private void Awake()
     {
@@ -83,6 +111,8 @@ public class MapManager : MonoBehaviour
         //마법 풀 관리
         for (int i = 0; i < _WeaponPool.Length; i++)
             WeaponManager[i] = _WeaponPool[i].GetComponent<AP_Pool>();
+
+        _MySkill = new List<MySkillList>();
     }
 
     private void Update()

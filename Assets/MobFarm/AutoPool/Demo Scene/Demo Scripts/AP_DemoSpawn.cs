@@ -18,6 +18,8 @@ public class AP_DemoSpawn : MonoBehaviour {
 	public int minPool;
 	int _level;
 	int _WeaponNumber;
+	[SerializeField]
+	int _ShootingCounter = 1;
 	int SpawnTime;
 	int SpawnTimeMax;
 	[SerializeField]
@@ -32,6 +34,7 @@ public class AP_DemoSpawn : MonoBehaviour {
     public int Level { get => _level; set => _level = value; }
     public int WeaponNumber { get => _WeaponNumber; set => _WeaponNumber = value; }
     public float Dmg { get => _dmg; set => _dmg = value; }
+    public int ShootingCounter { get => _ShootingCounter; set => _ShootingCounter = value; }
 
     void Awake () {
 		myRigidbody = gameObject.GetComponent<Rigidbody>();
@@ -70,41 +73,15 @@ public class AP_DemoSpawn : MonoBehaviour {
 
 			GameObject obj = null;
 
-			if (randomChild == true)
+			if (_Type == SpawnType.Weapon)
 			{
-				if (_Type == SpawnType.Weapon)
+				for (int i = 0; i < _ShootingCounter; i++)
 				{
-					if (_WeaponNumber == (int)SkillData.WeaponType.세갈래공격)
-					{
-						obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), transform.position + (spawnAngle * transform.forward), transform.rotation * spawnAngle);
-						obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z), transform.rotation * spawnAngle);
-						obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), new Vector3(transform.position.x + 1f, transform.position.y, transform.position.z), transform.rotation * spawnAngle);
-					}
-                    else if (_WeaponNumber == (int)SkillData.WeaponType.갈래공격)
-					{
-						obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), transform.position + (spawnAngle * transform.forward), transform.rotation * spawnAngle);
-						obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z), transform.rotation * spawnAngle);
-					}
-					else if (_WeaponNumber == (int)SkillData.WeaponType.오른쪽공격)
-                    {
-						obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), transform.position + (spawnAngle * transform.forward), Quaternion.Euler(new Vector3(0, 0, 0)));
-					}
-					else if (_WeaponNumber == (int)SkillData.WeaponType.왼쪽공격)
-					{
-						obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), transform.position + (spawnAngle * transform.forward), Quaternion.Euler(new Vector3(0, 180f, 0)));
-					}
-					else
-                    {
-						obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), transform.position + (spawnAngle * transform.forward), transform.rotation * spawnAngle);
-					}
+					obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), new Vector3(transform.position.x - i, transform.position.y, transform.position.z), transform.rotation * spawnAngle);
 				}
-				else if (_Type == SpawnType.Monster)
-					obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), MapManager.instance._player._SpawnPoint[Random.Range(0, MapManager.instance._player._SpawnPoint.Length)].position, Quaternion.identity);
 			}
-			else
-			{
-				obj = MF_AutoPool.Spawn(spawnPrefab, transform.position + (spawnAngle * transform.forward), transform.rotation * spawnAngle);
-			}
+			else if (_Type == SpawnType.Monster)
+				obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), MapManager.instance._player._SpawnPoint[Random.Range(0, MapManager.instance._player._SpawnPoint.Length)].position, Quaternion.identity);
 
 			Rigidbody rb = null;
 			if ( obj ) { rb = obj.GetComponent<Rigidbody>(); }

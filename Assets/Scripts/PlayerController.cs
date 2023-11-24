@@ -56,31 +56,39 @@ public class PlayerController : MonoBehaviour
         _level = 0;
     }
 
+    //스킬 등록
     public bool AddSkill(MapManager.WeaponType _weaponType)
     {
-        AP_DemoSpawn[] _SkillList = _WeaponSpawner.GetComponents<AP_DemoSpawn>();
         AP_DemoSpawn _spawnerConfig = null;
         GameObject _SkillPrefab = null;
 
-        if (_SkillList.Length != 0)
+        for (int i = 0; i < MapManager.instance._MySkill.Count; i++)
         {
-            foreach (AP_DemoSpawn _Skill in _SkillList)
+            if(MapManager.instance._MySkill[i]._weapon == _weaponType)
             {
-                if(_Skill.spawnPrefab.GetComponent<SkillData>()._WeaponType == _weaponType)
-                {
-                    //Config
-                    _Skill.Level++;
-                    for (int i = 0; i < MapManager.instance._skillList.Count; i++)
-                    {
-                        if (MapManager.instance._skillList[i]._skillPrefab == _Skill.spawnPrefab)
-                        {
-                            _Skill.WeaponNumber = (int)MapManager.instance._skillList[i]._skill[_Skill.Level]._weaponType;
-                            _Skill.Dmg = MapManager.instance._skillList[i]._skill[_Skill.Level]._Damage;
-                        }
-                    }
+                AP_DemoSpawn[] SpawnList = _WeaponSpawner.GetComponents<AP_DemoSpawn>();
+                AP_DemoSpawn _Skill = null;
 
-                    return false;
+                foreach (AP_DemoSpawn Ap_Skill in SpawnList)
+                {
+                    if (Ap_Skill.spawnPrefab.GetComponent<SkillData>().Data1.WeaponType == MapManager.instance._MySkill[i]._skills[Ap_Skill.Level]._weaponType)
+                    {
+                        _Skill = Ap_Skill;
+                        break;
+                    }
                 }
+
+                if (_Skill != null)
+                {
+                    if (MapManager.instance._MySkill[i]._skills.Length > _Skill.Level)
+                    {
+                        _Skill.Level++;
+                        _Skill.ShootingCounter = MapManager.instance._MySkill[i]._skills[_Skill.Level]._ShootingCOunter;
+                        Debug.Log("test");
+                    }
+                }
+
+                return false;
             }
         }
 
@@ -107,11 +115,13 @@ public class PlayerController : MonoBehaviour
         }
 
         if (_SkillPrefab == null) return false;
+
+        MapManager.instance.Add_Weapon(_weaponType);
         _spawnerConfig.spawnPrefab = _SkillPrefab;
         _spawnerConfig._Type = SpawnType.Weapon;
         _spawnerConfig.randomChild = true;
         _spawnerConfig.spawnInterval = 1;
-
+        Debug.Log(MapManager.instance._MySkill.Count);
         return true;
 
     }

@@ -32,7 +32,7 @@ public class CharaterData : MonoBehaviour
         _rigid = MapManager.instance._player.GetComponent<Rigidbody2D>();
         _playerController._MaxHP = _Stat.Health;
         _playerController._RecentHP = _Stat.Health;
-        _playerController.AddSkill(MapManager.WeaponType.Fireball);
+        Debug.Log(_playerController.AddSkill(MapManager.WeaponType.Fireball));
     }
 
     // Update is called once per frame
