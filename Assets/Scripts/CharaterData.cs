@@ -95,9 +95,6 @@ public class CharaterData : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (!IsAlive)
-            return;
-
         if (collision.gameObject.tag != "Monster")
             return;
 

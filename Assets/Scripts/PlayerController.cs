@@ -161,6 +161,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!_CharacterData.IsAlive) return;
+
         if (Input.GetKeyDown(KeyCode.Z))
         {
             LevelUp();
