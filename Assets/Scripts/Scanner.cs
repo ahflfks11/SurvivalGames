@@ -7,11 +7,31 @@ public class Scanner : MonoBehaviour
     public float scanRange;
     public float itemScanRange;
     public float DropSpeed;
+    float _tempCurTime = 0;
+    float _CurTime = 3f;
+    float _tempItemScanRange;
     public LayerMask targetLayer;
     public LayerMask itemLayer;
     public RaycastHit2D[] targets;
     public RaycastHit2D[] ItemScan;
     public Transform nearestTarget;
+
+    private void OnEnable()
+    {
+        _tempItemScanRange = itemScanRange;
+    }
+
+    private void Update()
+    {
+        if (_tempCurTime > 0)
+        {
+            _tempCurTime -= Time.deltaTime;
+        }
+        else
+        {
+            itemScanRange = _tempItemScanRange;
+        }
+    }
 
     private void LateUpdate()
     {
@@ -20,6 +40,13 @@ public class Scanner : MonoBehaviour
         nearestTarget = GetNearest();
         //if (ItemScan.Length != 0)
             //GetCoin();
+    }
+
+    public void Magnet()
+    {
+        _tempItemScanRange = itemScanRange;
+        _tempCurTime = _CurTime;
+        itemScanRange = 15f;
     }
 
     public void GetCoin()

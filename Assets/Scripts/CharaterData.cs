@@ -70,6 +70,14 @@ public class CharaterData : MonoBehaviour
         }
     }
 
+    public void Healing(float _Heal)
+    {
+        if (_playerController._RecentHP + _Heal <= _playerController._MaxHP)
+            _playerController._RecentHP += _Heal;
+        else
+            _playerController._RecentHP = _playerController._MaxHP;
+    }
+
     public void HitDamage(float _dmg)
     {
         _playerController._RecentHP -= _dmg;

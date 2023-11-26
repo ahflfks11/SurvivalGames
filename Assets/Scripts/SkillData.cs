@@ -28,7 +28,6 @@ public class SkillData : MonoBehaviour
         [Range(1f, 10f)]
         public float Power;
         public bool _SpecialAttack;
-        public float _attackRange;
         public LayerMask targetLayer;
     }
 
@@ -42,8 +41,8 @@ public class SkillData : MonoBehaviour
     Rigidbody2D _rigid;
     BoxCollider2D _col;
     Vector2 _WeaponDir;
+    Vector3 _myScale;
     RaycastHit2D[] _targets;
-
     public DB Data1 { get => Data; set => Data = value; }
     public float Dmg { get => _dmg; set => _dmg = value; }
     public int Level { get => _level; set => _level = value; }
@@ -56,6 +55,7 @@ public class SkillData : MonoBehaviour
 
     private void Update()
     {
+        transform.localScale = new Vector3(_myScale.x + MapManager.instance.MagicSize, _myScale.y + MapManager.instance.MagicSize, _myScale.z + MapManager.instance.MagicSize);
         for (int i = 0; i < MapManager.instance._MySkill.Count; i++)
         {
             if (MapManager.instance._MySkill[i]._weapon == _WeaponType)
@@ -68,9 +68,9 @@ public class SkillData : MonoBehaviour
 
     private void OnEnable()
     {
+        _myScale = transform.localScale;
         _rigid = transform.GetComponent<Rigidbody2D>();
         _col = transform.GetComponent<BoxCollider2D>();
-
         if (Data.WeaponType == WeaponType.관통 || Data.WeaponType == WeaponType.갈래공격 || Data.WeaponType == WeaponType.세갈래공격)
         {
             _dir = MapManager.instance._player.Scanner.nearestTarget.position;
@@ -98,22 +98,8 @@ public class SkillData : MonoBehaviour
         }
         else if (Data.WeaponType == WeaponType.제자리_다단공격)
         {
-            //StartCoroutine(Launcher());
             transform.SetParent(MapManager.instance._player.transform);
             transform.localPosition = Vector3.zero;
-        }
-    }
-
-    IEnumerator Launcher()
-    {
-        while (true)
-        {
-            _targets = Physics2D.CircleCastAll(transform.position, Data._attackRange, Vector2.zero, 0, Data.targetLayer);
-            for (int i = 0; i < _targets.Length; i++)
-            {
-                _targets[i].collider.GetComponent<Monster>().HitDamage(Data._Damage, false);
-            }
-            yield return new WaitForSeconds(0.2f);
         }
     }
 

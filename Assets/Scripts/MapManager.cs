@@ -9,7 +9,8 @@ public class MapManager : MonoBehaviour
     {
         GreenSlime = 0,
         BloodSlime,
-        HellDog
+        HellDog,
+        Ghost_Spirit
     };
 
     public enum ItemType
@@ -25,7 +26,8 @@ public class MapManager : MonoBehaviour
         Magic_Lighting,
         StarLight,
         Moving_Weapon,
-        Rocket
+        Rocket,
+        Barrior
     };
 
     [System.Serializable]
@@ -69,6 +71,7 @@ public class MapManager : MonoBehaviour
     public AP_Pool[] ItemList;
     public RuleTile _MapTileSet;
     public Item[] items;
+    public GameObject[] _Effects;
     public float _GameTime;
 
     [SerializeField]
@@ -76,8 +79,12 @@ public class MapManager : MonoBehaviour
     int min;
     int sec;
 
+    [SerializeField]
+    float _MagicSize = 0f;
+
     public int Min { get => min; set => min = value; }
     public int Sec { get => sec; set => sec = value; }
+    public float MagicSize { get => _MagicSize; set => _MagicSize = value; }
 
     private void Awake()
     {
@@ -119,6 +126,18 @@ public class MapManager : MonoBehaviour
             else
                 Time.timeScale = 1f;
         }
+    }
+        
+    public void SpawnEffects(GameObject _Object, int _EffectNumber)
+    {
+        if (GameObject.Find("Healing_Effects"))
+            return;
+
+        GameObject effectsPrefabs = Instantiate(_Effects[_EffectNumber], Vector3.zero, Quaternion.identity);
+        effectsPrefabs.transform.SetParent(_Object.transform);
+        effectsPrefabs.transform.localPosition = Vector3.zero;
+        effectsPrefabs.gameObject.name = "Healing_Effects";
+        Destroy(effectsPrefabs, 3f);
     }
 
     //무기 등록

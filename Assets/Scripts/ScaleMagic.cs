@@ -19,7 +19,7 @@ public class ScaleMagic : MonoBehaviour
         {
             if (MapManager.instance._MySkill[i]._weapon == _skillData._WeaponType)
             {
-                transform.localScale = new Vector3((MapManager.instance._MySkill[i].currectLevel + 1),(MapManager.instance._MySkill[i].currectLevel + 1),(MapManager.instance._MySkill[i].currectLevel + 1));
+                transform.localScale = new Vector3((MapManager.instance._MySkill[i].currectLevel + 1) + MapManager.instance.MagicSize, (MapManager.instance._MySkill[i].currectLevel + 1) + MapManager.instance.MagicSize, (MapManager.instance._MySkill[i].currectLevel + 1) + MapManager.instance.MagicSize);
                 break;
             }
         }

@@ -111,6 +111,25 @@ public class PlayerController : MonoBehaviour
                                 _Skill.ShootingCounter = MapManager.instance._MySkill[i]._skills[_Skill.Level]._ShootingCOunter;
                             }
                         }
+
+                        if (_Skill.Level >= 4)
+                        {
+                            for (int j = 0; j < MapManager.instance._skillList.Count; j++)
+                            {
+                                if (MapManager.instance._skillList[j]._weapon == _weaponType)
+                                {
+                                    MapManager.SkillList _tempSkillList = new MapManager.SkillList();
+                                    _tempSkillList._Icon = MapManager.instance._skillList[j]._Icon;
+                                    _tempSkillList._skillPrefab = MapManager.instance._skillList[j]._skillPrefab;
+                                    _tempSkillList._weapon = MapManager.instance._skillList[j]._weapon;
+                                    _tempSkillList._skill = MapManager.instance._skillList[j]._skill;
+                                    _tempSkillList._Non_Active = true;
+                                    _tempSkillList._Rarelity = MapManager.instance._skillList[j]._Rarelity;
+
+                                    MapManager.instance._skillList[j] = _tempSkillList;
+                                }
+                            }
+                        }
                     }
                 }
 

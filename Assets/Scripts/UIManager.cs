@@ -65,6 +65,15 @@ public class UIManager : MonoBehaviour
 
                             if (_uiPossible)
                             {
+                                int _Result_Number = 0;
+                                for (int i = 0; i < MapManager.instance._MySkill.Count; i++)
+                                {
+                                    if (MapManager.instance._MySkill[i]._weapon == MapManager.instance._skillList[j]._skillPrefab.GetComponent<SkillData>()._WeaponType)
+                                    {
+                                        _Result_Number = MapManager.instance._MySkill[i].currectLevel + 1;
+                                    }
+                                }
+
                                 GameObject _UI_Icon = Instantiate(_UISkillIcon.gameObject, Vector3.zero, Quaternion.identity);
                                 _UI_Icon.transform.SetParent(_UIContents);
                                 _UI_Icon.transform.position = Vector3.zero;
@@ -73,8 +82,8 @@ public class UIManager : MonoBehaviour
                                 UI_Skill_Icon _Contents_UI = _UI_Icon.GetComponent<UI_Skill_Icon>();
                                 _Contents_UI.GetComponent<Image>().sprite = MapManager.instance._skillList[j]._Icon;
                                 _Contents_UI._weaponType = MapManager.instance._skillList[j]._skillPrefab.GetComponent<SkillData>()._WeaponType;
-                                _Contents_UI._TitleLabel.text = MapManager.instance._skillList[j]._skill[0]._SkillName;
-                                _Contents_UI._CommentLine.text = MapManager.instance._skillList[j]._skill[0]._SkillComment;
+                                _Contents_UI._TitleLabel.text = MapManager.instance._skillList[j]._skill[_Result_Number]._SkillName;
+                                _Contents_UI._CommentLine.text = MapManager.instance._skillList[j]._skill[_Result_Number]._SkillComment;
                                 _UICount++;
                                 _tempUIList.Add(j);
                                 break;

@@ -16,6 +16,7 @@ public class AP_DemoSpawn : MonoBehaviour {
 	public bool randomChild;
 	public int addToPool;
 	public int minPool;
+
 	[SerializeField]
 	int _level;
 	int _WeaponNumber;
@@ -29,6 +30,8 @@ public class AP_DemoSpawn : MonoBehaviour {
 	public float spawnVelocity;
 	public float spawnAngleError;
 
+	bool _SpawningTimeChange;
+	bool _Passive;
 	float nextSpawn;
 	Rigidbody myRigidbody;
 
@@ -53,7 +56,7 @@ public class AP_DemoSpawn : MonoBehaviour {
 	}
 
     void Update () {
-		if (spawnPrefab == null) return;
+		if (spawnPrefab == null || _Type == SpawnType.None) return;
 
 		if (MapManager.instance._player.Scanner.nearestTarget == null && _Type == SpawnType.Weapon)
 			return;
@@ -65,9 +68,22 @@ public class AP_DemoSpawn : MonoBehaviour {
 		{
 			if (SpawnTimeMax != 0 && MapManager.instance.Min >= SpawnTimeMax)
 				return;
+
+			if ((MapManager.instance.Min != 0 && MapManager.instance.Min % 2 == 0) && spawnInterval > 0.05f)
+			{
+				if (!_SpawningTimeChange)
+				{
+					spawnInterval -= 0.01f;
+					_SpawningTimeChange = true;
+				}
+			}
+			else
+			{
+				_SpawningTimeChange = false;
+			}
 		}
 
-		if ( Time.time >= nextSpawn ) {
+		if ( Time.time >= nextSpawn) {
 
 			Vector2 errorV2 = Random.insideUnitCircle * spawnAngleError;
 			Quaternion spawnAngle = Quaternion.Euler( errorV2.x, errorV2.y, 0 );
@@ -83,7 +99,24 @@ public class AP_DemoSpawn : MonoBehaviour {
 				}
 			}
 			else if (_Type == SpawnType.Monster)
-				obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), MapManager.instance._player._SpawnPoint[Random.Range(0, MapManager.instance._player._SpawnPoint.Length)].position, Quaternion.identity);
+			{
+				int _SpawnNumber = Random.Range(0, MapManager.instance._player._SpawnPoint.Length);
+
+				for (int i = 0; i < _ShootingCounter; i++)
+				{
+					obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), new Vector3(MapManager.instance._player._SpawnPoint[_SpawnNumber].position.x - Random.Range(-1, 1), MapManager.instance._player._SpawnPoint[_SpawnNumber].position.y - Random.Range(-1, 1), MapManager.instance._player._SpawnPoint[_SpawnNumber].position.z), Quaternion.identity);
+				}
+            }
+            else
+            {
+				int _randomSpawn = Random.Range(0, 3);
+
+				if (_randomSpawn < 1)
+				{
+					int _SpawnNumber = Random.Range(0, MapManager.instance._player._SpawnPoint.Length);
+					obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), new Vector3(MapManager.instance._player._SpawnPoint[_SpawnNumber].position.x - Random.Range(-1, 1), MapManager.instance._player._SpawnPoint[_SpawnNumber].position.y - Random.Range(-1, 1), MapManager.instance._player._SpawnPoint[_SpawnNumber].position.z), Quaternion.identity);
+				}
+			}
 
 			Rigidbody rb = null;
 			if ( obj ) { rb = obj.GetComponent<Rigidbody>(); }

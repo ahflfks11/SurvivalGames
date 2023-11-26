@@ -5049,7 +5049,7 @@ MonoBehaviour:
   _Data:
     _HP: 12
     _MonsterType: 2
-    _Damage: 3
+    _Damage: 2
     _Speed: 4
     _Resistance: 1
     SpawnLevel: 4

@@ -10,6 +10,8 @@ TagManager:
   - Monster
   - WeaponPool
   - MonsterPool
+  - PlayerFire
+  - Item_Pool
   layers:
   - Default
   - TransparentFX
@@ -24,7 +26,7 @@ TagManager:
   - Item
   - Walls
   - Bullets
-  - 
+  - Items
   - 
   - 
   - 
