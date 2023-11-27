@@ -50,12 +50,12 @@ public class Monster : MonoBehaviour
     private void FixedUpdate()
     {
         if (_TempDurationTime > 0) _TempDurationTime -= Time.fixedDeltaTime;
-        
+
         if (_AniController.GetCurrentAnimatorStateInfo(0).IsName("Death"))
         {
             if (_mobCol.enabled) _mobCol.enabled = false;
 
-            if (_AniController.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f)
+            if (_AniController.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f)
             {
                 MapManager.instance.MobManager[(int)Data._MonsterType].poolBlock.size -= 1;
                 GameObject _Coin = MF_AutoPool.Spawn(MapManager.instance.items[0].gameObject, transform.position, Quaternion.identity);
@@ -63,11 +63,15 @@ public class Monster : MonoBehaviour
                 Destroy(this.gameObject);
             }
             else
+            {
+                StartCoroutine(KnockBack());
                 return;
+            }
         }
-        else
+        else if (_AniController.GetCurrentAnimatorStateInfo(0).IsName("Hit") && _Data._Resistance > 0)
         {
-            Knowback = false;
+            StartCoroutine(KnockBack());
+            return;
         }
 
         Vector2 dirVec = MapManager.instance._player.Rigid.position - _rigid.position;
@@ -86,7 +90,6 @@ public class Monster : MonoBehaviour
 
     IEnumerator KnockBack()
     {
-        Knowback = true;
         yield return _CorutinTime;
         Vector3 playerPos = MapManager.instance._player.transform.position;
         Vector3 dirVec = transform.position - playerPos;
@@ -99,7 +102,6 @@ public class Monster : MonoBehaviour
 
         if (_RecentHP > 0)
         {
-            if (_KnockBack) StartCoroutine(KnockBack());
             _AniController.SetTrigger("Hit");
         }
         else

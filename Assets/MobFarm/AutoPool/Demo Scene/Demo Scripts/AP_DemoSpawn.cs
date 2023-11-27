@@ -103,7 +103,7 @@ public class AP_DemoSpawn : MonoBehaviour {
 
 				for (int i = 0; i < _ShootingCounter; i++)
 				{
-					obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), new Vector3(MapManager.instance._player._SpawnPoint[_SpawnNumber].position.x - Random.Range(-1, 1), MapManager.instance._player._SpawnPoint[_SpawnNumber].position.y - Random.Range(-1, 1), MapManager.instance._player._SpawnPoint[_SpawnNumber].position.z), Quaternion.identity);
+					obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), new Vector3(MapManager.instance._player._SpawnPoint[_SpawnNumber].position.x - Random.Range(-1.5f, 1.5f), MapManager.instance._player._SpawnPoint[_SpawnNumber].position.y - Random.Range(-1.5f, 1.5f), MapManager.instance._player._SpawnPoint[_SpawnNumber].position.z), Quaternion.identity);
 				}
             }
             else
