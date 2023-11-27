@@ -27,7 +27,8 @@ public class MapManager : MonoBehaviour
         StarLight,
         Moving_Weapon,
         Rocket,
-        Barrior
+        Barrior,
+        Passive_Health
     };
 
     [System.Serializable]

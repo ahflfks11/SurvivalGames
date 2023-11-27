@@ -160,14 +160,17 @@ public class PlayerController : MonoBehaviour
         }
 
         if (_SkillPrefab == null) return false;
-
         MapManager.instance.Add_Weapon(_weaponType);
         _spawnerConfig.spawnPrefab = _SkillPrefab;
         _spawnerConfig._Type = SpawnType.Weapon;
         _spawnerConfig.randomChild = true;
         _spawnerConfig.spawnInterval = 1;
         return true;
+    }
 
+    public void HealthUp(float _health, bool _isMaxHP)
+    {
+        _MaxHP = _isMaxHP ? _MaxHP += _health : _RecentHP += _health;
     }
 
     public void LevelUp()

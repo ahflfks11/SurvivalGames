@@ -37,6 +37,8 @@ public class SkillData : MonoBehaviour
     public MapManager.WeaponType _WeaponType;
     [SerializeField]
     int _level = 0;
+    [SerializeField]
+    bool _Passive;
     Vector3 _dir = Vector3.zero;
     Rigidbody2D _rigid;
     BoxCollider2D _col;
@@ -46,6 +48,7 @@ public class SkillData : MonoBehaviour
     public DB Data1 { get => Data; set => Data = value; }
     public float Dmg { get => _dmg; set => _dmg = value; }
     public int Level { get => _level; set => _level = value; }
+    public bool Passive { get => _Passive; set => _Passive = value; }
 
     public void DestoryPrefab()
     {
@@ -55,19 +58,24 @@ public class SkillData : MonoBehaviour
 
     private void Update()
     {
-        transform.localScale = new Vector3(_myScale.x + MapManager.instance.MagicSize, _myScale.y + MapManager.instance.MagicSize, _myScale.z + MapManager.instance.MagicSize);
         for (int i = 0; i < MapManager.instance._MySkill.Count; i++)
         {
             if (MapManager.instance._MySkill[i]._weapon == _WeaponType)
             {
+                _level = MapManager.instance._MySkill[i].currectLevel;
                 Data._Damage = MapManager.instance._MySkill[i]._skills[MapManager.instance._MySkill[i].currectLevel]._Damage;
                 break;
             }
         }
+
+        if (_Passive) return;
+
+        transform.localScale = new Vector3(_myScale.x + MapManager.instance.MagicSize, _myScale.y + MapManager.instance.MagicSize, _myScale.z + MapManager.instance.MagicSize);
     }
 
     private void OnEnable()
     {
+        if (_Passive) return;
         _myScale = transform.localScale;
         _rigid = transform.GetComponent<Rigidbody2D>();
         _col = transform.GetComponent<BoxCollider2D>();
@@ -105,7 +113,7 @@ public class SkillData : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Monster"))
+        if (!collision.CompareTag("Monster") || _Passive)
             return;
 
         if (MapManager.instance.WeaponManager[(int)_WeaponType].poolBlock.size >= 1 && Data1.WeaponType == WeaponType.효과없음)

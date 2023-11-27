@@ -31,7 +31,6 @@ public class AP_DemoSpawn : MonoBehaviour {
 	public float spawnAngleError;
 
 	bool _SpawningTimeChange;
-	bool _Passive;
 	float nextSpawn;
 	Rigidbody myRigidbody;
 
