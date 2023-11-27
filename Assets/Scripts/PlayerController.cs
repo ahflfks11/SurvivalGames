@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     VariableJoystick _Joystick;
     float _posX;
     float _posY;
+    [SerializeField]
     float _speed;
     public float _RecentHP;
     public float _MaxHP;
@@ -166,6 +167,11 @@ public class PlayerController : MonoBehaviour
         _spawnerConfig.randomChild = true;
         _spawnerConfig.spawnInterval = 1;
         return true;
+    }
+
+    public void SpeedUp(float MySpeed)
+    {
+        _speed += MySpeed;
     }
 
     public void HealthUp(float _health, bool _isMaxHP)

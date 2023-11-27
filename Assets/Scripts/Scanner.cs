@@ -42,6 +42,11 @@ public class Scanner : MonoBehaviour
             //GetCoin();
     }
 
+    public void MagnetUp(float _value)
+    {
+        _tempItemScanRange += _value;
+    }
+
     public void Magnet()
     {
         _tempItemScanRange = itemScanRange;

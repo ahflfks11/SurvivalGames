@@ -11,7 +11,8 @@ public class Passive_Stat : MonoBehaviour
         Recent_Health,
         Speed,
         MagicSize,
-        MagnetRange
+        MagnetRange,
+        CommonDamage
     }
 
     [SerializeField]
@@ -32,6 +33,18 @@ public class Passive_Stat : MonoBehaviour
             {
                 case StatTypes.MAX_Health:
                     MapManager.instance._player.HealthUp(_skillData.Data1._Damage, true);
+                    break;
+                case StatTypes.Speed:
+                    MapManager.instance._player.SpeedUp(_skillData.Data1._Damage);
+                    break;
+                case StatTypes.MagnetRange:
+                    MapManager.instance._player.Scanner.MagnetUp(_skillData.Data1._Damage);
+                    break;
+                case StatTypes.MagicSize:
+                    MapManager.instance.MagicSizeUp(_skillData.Data1._Damage);
+                    break;
+                case StatTypes.CommonDamage:
+                    MapManager.instance.CommonDamageUp(_skillData.Data1._Damage);
                     break;
             }
             level = _skillData.Level;

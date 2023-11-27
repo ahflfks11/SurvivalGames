@@ -63,7 +63,7 @@ public class SkillData : MonoBehaviour
             if (MapManager.instance._MySkill[i]._weapon == _WeaponType)
             {
                 _level = MapManager.instance._MySkill[i].currectLevel;
-                Data._Damage = MapManager.instance._MySkill[i]._skills[MapManager.instance._MySkill[i].currectLevel]._Damage;
+                Data._Damage = MapManager.instance._MySkill[i]._skills[MapManager.instance._MySkill[i].currectLevel]._Damage + MapManager.instance.CommonDamage;
                 break;
             }
         }

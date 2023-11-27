@@ -28,7 +28,11 @@ public class MapManager : MonoBehaviour
         Moving_Weapon,
         Rocket,
         Barrior,
-        Passive_Health
+        Passive_Health,
+        Passive_Speed,
+        Passive_Magnet,
+        Passive_MagicSize,
+        Passive_Damage
     };
 
     [System.Serializable]
@@ -83,9 +87,12 @@ public class MapManager : MonoBehaviour
     [SerializeField]
     float _MagicSize = 0f;
 
+    float _CommonDamage = 0f;
+
     public int Min { get => min; set => min = value; }
     public int Sec { get => sec; set => sec = value; }
     public float MagicSize { get => _MagicSize; set => _MagicSize = value; }
+    public float CommonDamage { get => _CommonDamage; set => _CommonDamage = value; }
 
     private void Awake()
     {
@@ -127,6 +134,16 @@ public class MapManager : MonoBehaviour
             else
                 Time.timeScale = 1f;
         }
+    }
+
+    public void CommonDamageUp(float _value)
+    {
+        _CommonDamage += _value;
+    }
+
+    public void MagicSizeUp(float _value)
+    {
+        MagicSize += _value;
     }
         
     public void SpawnEffects(GameObject _Object, int _EffectNumber)
