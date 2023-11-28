@@ -32,7 +32,8 @@ public class MapManager : MonoBehaviour
         Passive_Speed,
         Passive_Magnet,
         Passive_MagicSize,
-        Passive_Damage
+        Passive_Damage,
+        bomb
     };
 
     [System.Serializable]
@@ -44,6 +45,7 @@ public class MapManager : MonoBehaviour
         public WeaponType _weaponType;
         public int _ShootingCOunter;
         public float _Damage;
+        public float _CoolTime;
     }
 
     [System.Serializable]

@@ -12,6 +12,7 @@ Material:
   m_ValidKeywords:
   - ETC1_EXTERNAL_ALPHA
   - _ENABLEINNEROUTLINE_ON
+  - _ENABLESINESCALE_ON
   - _INNEROUTLINEDISTORTIONTOGGLE_ON
   - _INNEROUTLINETEXTURETOGGLE_ON
   - _SHADERFADING_NONE
@@ -254,7 +255,7 @@ Material:
     - _EnableSineGlow: 0
     - _EnableSineMove: 0
     - _EnableSineRotate: 0
-    - _EnableSineScale: 0
+    - _EnableSineScale: 1
     - _EnableSmoke: 0
     - _EnableSmoothPixelArt: 0
     - _EnableSourceAlphaDissolve: 0
@@ -599,7 +600,7 @@ Material:
     - _SineMoveFrequency: {r: 1, g: 1, b: 0, a: 0}
     - _SineMoveOffset: {r: 0, g: 0.5, b: 0, a: 0}
     - _SineRotatePivot: {r: 0.5, g: 0.5, b: 0, a: 0}
-    - _SineScaleFactor: {r: 0.2, g: 0.2, b: 0, a: 0}
+    - _SineScaleFactor: {r: 0.1, g: 0.1, b: 0, a: 0}
     - _SourceAlphaDissolveNoiseScale: {r: 0.3, g: 0.3, b: 0, a: 0}
     - _SourceAlphaDissolvePosition: {r: 0, g: 0, b: 0, a: 0}
     - _SourceGlowDissolveEdgeColor: {r: 11.98431, g: 0.627451, b: 0.627451, a: 0}

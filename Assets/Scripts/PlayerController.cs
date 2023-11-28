@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
                     if (_Skill.Level < 4)
                     {
                         _Skill.Level++;
-
+                        _Skill.spawnInterval = MapManager.instance._MySkill[i]._skills[_Skill.Level]._CoolTime;
                         MapManager.MySkillList _tempSkill = new MapManager.MySkillList();
                         _tempSkill._weapon = _weaponType;
                         _tempSkill._skills = MapManager.instance._MySkill[i]._skills;
@@ -126,7 +126,6 @@ public class PlayerController : MonoBehaviour
                                     _tempSkillList._skill = MapManager.instance._skillList[j]._skill;
                                     _tempSkillList._Non_Active = true;
                                     _tempSkillList._Rarelity = MapManager.instance._skillList[j]._Rarelity;
-
                                     MapManager.instance._skillList[j] = _tempSkillList;
                                 }
                             }
@@ -161,11 +160,21 @@ public class PlayerController : MonoBehaviour
         }
 
         if (_SkillPrefab == null) return false;
+
         MapManager.instance.Add_Weapon(_weaponType);
-        _spawnerConfig.spawnPrefab = _SkillPrefab;
-        _spawnerConfig._Type = SpawnType.Weapon;
-        _spawnerConfig.randomChild = true;
-        _spawnerConfig.spawnInterval = 1;
+
+        foreach(MapManager.SkillList _skillData in MapManager.instance._skillList)
+        {
+            if(_skillData._skillPrefab == _SkillPrefab)
+            {
+                _spawnerConfig.spawnPrefab = _SkillPrefab;
+                _spawnerConfig._Type = SpawnType.Weapon;
+                _spawnerConfig.randomChild = true;
+                _spawnerConfig.spawnInterval = _skillData._skill[0]._CoolTime;
+                break;
+            }
+        }
+
         return true;
     }
 

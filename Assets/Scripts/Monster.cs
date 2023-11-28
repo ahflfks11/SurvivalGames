@@ -25,11 +25,9 @@ public class Monster : MonoBehaviour
     float _RecentHP;
     float _durationTime = 0.02f;
     float _TempDurationTime = 0f;
-    Rigidbody2D _target;
     Rigidbody2D _rigid;
     Animator _AniController;
     WaitForFixedUpdate _CorutinTime;
-    Collider2D _mobCol;
 
     public Data Data { get => _Data; set => _Data = value; }
 
@@ -43,7 +41,6 @@ public class Monster : MonoBehaviour
         _RecentHP = Data._HP + MapManager.instance.Min;
         _rigid = transform.GetComponent<Rigidbody2D>();
         _AniController = transform.GetComponent<Animator>();
-        _mobCol = transform.GetComponent<Collider2D>();
         //Coin
         MF_AutoPool.InitializeSpawn(MapManager.instance.items[0].gameObject, 0, 0);
     }
@@ -54,9 +51,7 @@ public class Monster : MonoBehaviour
 
         if (_AniController.GetCurrentAnimatorStateInfo(0).IsName("Death"))
         {
-            if (_mobCol.enabled) _mobCol.enabled = false;
-
-            if (_AniController.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f)
+            if (_AniController.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f)
             {
                 MapManager.instance.MobManager[(int)Data._MonsterType].poolBlock.size -= 1;
                 GameObject _Coin = MF_AutoPool.Spawn(MapManager.instance.items[0].gameObject, transform.position, Quaternion.identity);

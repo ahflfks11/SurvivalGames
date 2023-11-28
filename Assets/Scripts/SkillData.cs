@@ -15,7 +15,8 @@ public class SkillData : MonoBehaviour
         갈래공격,
         세갈래공격,
         제자리_다단공격,
-        제자리_특수공격
+        제자리_특수공격,
+        랜덤_스폰
     };
 
     [System.Serializable]

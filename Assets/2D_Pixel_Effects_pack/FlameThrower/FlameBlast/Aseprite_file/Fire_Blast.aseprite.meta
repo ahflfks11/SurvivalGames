@@ -1,0 +1,526 @@
+fileFormatVersion: 2
+guid: be82b2196632aef4abe48b6da9a91453
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMasterTextureLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: Fire_Blast_Frame_0
+    originalName: 
+    pivot: {x: 1.0666667, y: -1.1111112}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 99
+      y: 95
+      width: 15
+      height: 9
+    spriteID: e24745996ccf1e34f86bf211d07d8ef0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 99, y: 95}
+  - name: Fire_Blast_Frame_1
+    originalName: 
+    pivot: {x: 0.64, y: -0.4117647}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 41
+      y: 95
+      width: 25
+      height: 17
+    spriteID: 03625510dbd503348b667a4ac76d4c7c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 41, y: 95}
+  - name: Fire_Blast_Frame_2
+    originalName: 
+    pivot: {x: 0.55172414, y: -0.3888889}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 95
+      width: 29
+      height: 18
+    spriteID: 46056ca1d15a1cb4087a5da469d67d36
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 95}
+  - name: Fire_Blast_Frame_3
+    originalName: 
+    pivot: {x: 0.516129, y: -0.2857143}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 43
+      y: 37
+      width: 31
+      height: 21
+    spriteID: de9501648b3968b40ac82f13badd978d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 43, y: 37}
+  - name: Fire_Blast_Frame_4
+    originalName: 
+    pivot: {x: 0.516129, y: -0.12}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 31
+      height: 25
+    spriteID: 283536487379c2a458d63d2231552982
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: Fire_Blast_Frame_5
+    originalName: 
+    pivot: {x: 0.516129, y: -0.125}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 43
+      y: 4
+      width: 31
+      height: 24
+    spriteID: 4e91e3de68abc9c408e78b28528b9b42
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 43, y: 4}
+  - name: Fire_Blast_Frame_6
+    originalName: 
+    pivot: {x: 0.516129, y: -0.17391305}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 82
+      y: 4
+      width: 31
+      height: 23
+    spriteID: 6753dab6ea79b614b90db590c0617928
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 82, y: 4}
+  - name: Fire_Blast_Frame_7
+    originalName: 
+    pivot: {x: 0.516129, y: -0.17391305}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 37
+      width: 31
+      height: 23
+    spriteID: f96746d14d123474b925cdc0d2b06341
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 37}
+  - name: Fire_Blast_Frame_8
+    originalName: 
+    pivot: {x: 0.516129, y: -0.36842105}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 68
+      width: 31
+      height: 19
+    spriteID: 9f17239f7dec02046a1b9c6e343cf14e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 68}
+  - name: Fire_Blast_Frame_9
+    originalName: 
+    pivot: {x: 0.516129, y: -0.3}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 82
+      y: 37
+      width: 31
+      height: 20
+    spriteID: 61c102488f997bf48976fe985f9b2059
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 82, y: 37}
+  - name: Fire_Blast_Frame_10
+    originalName: 
+    pivot: {x: 0.516129, y: -0.36842105}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 43
+      y: 68
+      width: 31
+      height: 19
+    spriteID: 45c2d245d11de9d4a92505729eedce1a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 43, y: 68}
+  - name: Fire_Blast_Frame_11
+    originalName: 
+    pivot: {x: 0.516129, y: -0.4117647}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 82
+      y: 68
+      width: 31
+      height: 17
+    spriteID: 8daae9e449371a447a04d5c7ff25ee69
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 82, y: 68}
+  - name: Fire_Blast_Frame_12
+    originalName: 
+    pivot: {x: 0.9411765, y: -1}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 74
+      y: 95
+      width: 17
+      height: 10
+    spriteID: 7e2e16c7cff25a247929d4f78eb3bec3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 74, y: 95}
+  - name: Fire_Blast_Frame_13
+    originalName: 
+    pivot: {x: 1.0666667, y: -2}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 74
+      y: 113
+      width: 15
+      height: 6
+    spriteID: ad10e5562acc1b84ea8265d76e00fad6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 74, y: 113}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: -1091292965
+    name: Fire_Blast
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: Fire_Blast_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 0
+        y: 10
+        width: 15
+        height: 9
+      spriteId: e24745996ccf1e34f86bf211d07d8ef0
+    - name: Fire_Blast_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 0
+        y: 7
+        width: 25
+        height: 17
+      spriteId: 03625510dbd503348b667a4ac76d4c7c
+    - name: Fire_Blast_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 0
+        y: 7
+        width: 29
+        height: 18
+      spriteId: 46056ca1d15a1cb4087a5da469d67d36
+    - name: Fire_Blast_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 0
+        y: 6
+        width: 31
+        height: 21
+      spriteId: de9501648b3968b40ac82f13badd978d
+    - name: Fire_Blast_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 0
+        y: 3
+        width: 31
+        height: 25
+      spriteId: 283536487379c2a458d63d2231552982
+    - name: Fire_Blast_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 0
+        y: 3
+        width: 31
+        height: 24
+      spriteId: 4e91e3de68abc9c408e78b28528b9b42
+    - name: Fire_Blast_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 0
+        y: 4
+        width: 31
+        height: 23
+      spriteId: 6753dab6ea79b614b90db590c0617928
+    - name: Fire_Blast_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 0
+        y: 4
+        width: 31
+        height: 23
+      spriteId: f96746d14d123474b925cdc0d2b06341
+    - name: Fire_Blast_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 0
+        y: 7
+        width: 31
+        height: 19
+      spriteId: 9f17239f7dec02046a1b9c6e343cf14e
+    - name: Fire_Blast_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 0
+        y: 6
+        width: 31
+        height: 20
+      spriteId: 61c102488f997bf48976fe985f9b2059
+    - name: Fire_Blast_Frame_10
+      frameIndex: 10
+      cellRect:
+        x: 0
+        y: 7
+        width: 31
+        height: 19
+      spriteId: 45c2d245d11de9d4a92505729eedce1a
+    - name: Fire_Blast_Frame_11
+      frameIndex: 11
+      cellRect:
+        x: 0
+        y: 7
+        width: 31
+        height: 17
+      spriteId: 8daae9e449371a447a04d5c7ff25ee69
+    - name: Fire_Blast_Frame_12
+      frameIndex: 12
+      cellRect:
+        x: 0
+        y: 10
+        width: 17
+        height: 10
+      spriteId: 7e2e16c7cff25a247929d4f78eb3bec3
+    - name: Fire_Blast_Frame_13
+      frameIndex: 13
+      cellRect:
+        x: 0
+        y: 12
+        width: 15
+        height: 6
+      spriteId: ad10e5562acc1b84ea8265d76e00fad6
+    linkedCells: []
+    parentIndex: -1
+  platformSettings: []
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 32, y: 32}
