@@ -14,6 +14,7 @@ public struct Data
     public int SpawnLevel;
     public int SpawnLimitLevel; //특정 레벨 이상부터는 스폰이 되지 않는다.
     public int exp;
+    public string _PopupText;
 }
 public class Monster : MonoBehaviour
 {

@@ -30,7 +30,15 @@ public class AP_DemoSpawn : MonoBehaviour {
 	public float spawnVelocity;
 	public float spawnAngleError;
 
+	float _spawnPosX = -2.5f;
+	float _Max_spawnPosX = 2.5f;
+	float _spawnPosY = -2.5f;
+	float _Max_SpawnPosY = 2.5f;
+
 	bool _SpawningTimeChange;
+	[SerializeField]
+	bool _randomCounterSpawn;
+	bool _isBattleUIActive;
 	float nextSpawn;
 	Rigidbody myRigidbody;
 
@@ -56,6 +64,26 @@ public class AP_DemoSpawn : MonoBehaviour {
 
     void Update () {
 		if (spawnPrefab == null || _Type == SpawnType.None) return;
+
+		if (_Type == SpawnType.Monster)
+        {
+			Monster _MobData = spawnPrefab.GetComponent<Monster>();
+
+			if (_MobData.Data._PopupText != null)
+			{
+				if (_MobData.Data.SpawnLevel - 1 == MapManager.instance.Min && MapManager.instance.Sec >= 30f)
+				{
+					MapManager.instance._uiManager.BattleUI(_MobData.Data._PopupText);
+					_isBattleUIActive = true;
+				}
+
+				if (_MobData.Data.SpawnLevel - 1 < MapManager.instance.Min && _isBattleUIActive)
+				{
+					MapManager.instance._uiManager.BattleUI("");
+					_isBattleUIActive = false;
+				}
+			}
+        }
 
 		if (MapManager.instance._player.Scanner.nearestTarget == null && _Type == SpawnType.Weapon)
 			return;
@@ -100,10 +128,11 @@ public class AP_DemoSpawn : MonoBehaviour {
 			else if (_Type == SpawnType.Monster)
 			{
 				int _SpawnNumber = Random.Range(0, MapManager.instance._player._SpawnPoint.Length);
+				int _randomSpawnCounter = _randomCounterSpawn ? _randomSpawnCounter = Random.Range(1, _ShootingCounter) : _randomSpawnCounter = ShootingCounter;
 
-				for (int i = 0; i < _ShootingCounter; i++)
+				for (int i = 0; i < _randomSpawnCounter; i++)
 				{
-					obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), new Vector3(MapManager.instance._player._SpawnPoint[_SpawnNumber].position.x - Random.Range(-1.5f, 1.5f), MapManager.instance._player._SpawnPoint[_SpawnNumber].position.y - Random.Range(-1.5f, 1.5f), MapManager.instance._player._SpawnPoint[_SpawnNumber].position.z), Quaternion.identity);
+					obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), new Vector3(MapManager.instance._player._SpawnPoint[_SpawnNumber].position.x - Random.Range(_spawnPosX, _Max_spawnPosX), MapManager.instance._player._SpawnPoint[_SpawnNumber].position.y - Random.Range(_spawnPosY, _Max_SpawnPosY), MapManager.instance._player._SpawnPoint[_SpawnNumber].position.z), Quaternion.identity);
 				}
             }
             else

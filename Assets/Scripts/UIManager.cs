@@ -10,8 +10,15 @@ public class UIManager : MonoBehaviour
     public GameObject _UIPanel;
     public Text _TimerText;
     public Text _EXPText;
+    public Text _Battle_UIText;
     public Slider _HPUI;
     public Slider _EXPUI;
+
+    public void BattleUI(string _uiText)
+    {
+        _Battle_UIText.gameObject.SetActive(true);
+        _Battle_UIText.text = _uiText;
+    }
 
     public void Panel()
     {
