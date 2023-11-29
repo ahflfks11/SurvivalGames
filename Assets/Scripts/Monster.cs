@@ -24,7 +24,7 @@ public class Monster : MonoBehaviour
     bool Knowback;
     bool _isDead;
     float _RecentHP;
-    float _durationTime = 0.02f;
+    float _durationTime = 0.01f;
     float _TempDurationTime = 0f;
     Rigidbody2D _rigid;
     Animator _AniController;

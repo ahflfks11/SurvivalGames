@@ -22,8 +22,10 @@ public class CharaterData : MonoBehaviour
     float _durationTime = 0.5f;
     float _tempDurationTime = 0f;
     bool _isAlive;
+    bool _isRight = true;
     public CharacterStat Stat { get => _Stat; set => _Stat = value; }
     public bool IsAlive { get => _isAlive; set => _isAlive = value; }
+    public bool IsRight { get => _isRight; set => _isRight = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +36,7 @@ public class CharaterData : MonoBehaviour
         _playerController._MaxHP = _Stat.Health;
         _playerController._RecentHP = _Stat.Health;
         IsAlive = true;
-        _playerController.AddSkill(MapManager.WeaponType.NormalAttack);
+        _playerController.AddSkill(MapManager.WeaponType.WeaponAttack);
     }
 
     // Update is called once per frame
@@ -56,9 +58,11 @@ public class CharaterData : MonoBehaviour
             if (_playerController.PosX < 0)
             {
                 transform.rotation = Quaternion.Euler(0, -180, 0);
+                _isRight = false;
             }
             else
             {
+                _isRight = true;
                 transform.rotation = Quaternion.Euler(0, 0, 0);
             }
 

@@ -33,7 +33,8 @@ public class MapManager : MonoBehaviour
         Passive_Magnet,
         Passive_MagicSize,
         Passive_Damage,
-        bomb
+        bomb,
+        WeaponAttack
     };
 
     [System.Serializable]
