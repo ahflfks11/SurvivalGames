@@ -117,6 +117,8 @@ public class MapManager : MonoBehaviour
             WeaponManager[i] = _WeaponPool[i].GetComponent<AP_Pool>();
 
         _MySkill = new List<MySkillList>();
+
+        SetReSolution();
     }
 
     private void Update()
@@ -136,6 +138,11 @@ public class MapManager : MonoBehaviour
             else
                 Time.timeScale = 1f;
         }
+    }
+
+    public void SetReSolution()
+    {
+        Screen.SetResolution(Screen.width, Screen.height, true);
     }
 
     public void CommonDamageUp(float _value)
