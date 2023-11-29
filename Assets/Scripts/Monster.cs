@@ -40,7 +40,7 @@ public class Monster : MonoBehaviour
 
     private void OnEnable()
     {
-        _RecentHP = Data._HP + MapManager.instance.Min;
+        //_RecentHP = Data._HP + MapManager.instance.Min;
         _rigid = transform.GetComponent<Rigidbody2D>();
         _AniController = transform.GetComponent<Animator>();
         //Coin

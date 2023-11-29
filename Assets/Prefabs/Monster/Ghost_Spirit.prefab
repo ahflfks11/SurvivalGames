@@ -237,11 +237,12 @@ MonoBehaviour:
     _HP: 16
     _MonsterType: 3
     _Damage: 4
-    _Speed: 6.5
+    _Speed: 2.5
     _Resistance: 0
     SpawnLevel: 5
     SpawnLimitLevel: 0
     exp: 6
+    _PopupText: 
 --- !u!1 &3497634952053021616
 GameObject:
   m_ObjectHideFlags: 0
