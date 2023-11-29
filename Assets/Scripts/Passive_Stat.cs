@@ -19,6 +19,9 @@ public class Passive_Stat : MonoBehaviour
     StatTypes _statType;
     SkillData _skillData;
     int level = -1;
+    float _originValue;
+
+    public float OriginValue { get => _originValue; set => _originValue = value; }
 
     private void OnEnable()
     {

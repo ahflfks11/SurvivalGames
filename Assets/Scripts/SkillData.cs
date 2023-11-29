@@ -42,14 +42,15 @@ public class SkillData : MonoBehaviour
     bool _Passive;
     Vector3 _dir = Vector3.zero;
     Rigidbody2D _rigid;
-    BoxCollider2D _col;
     Vector2 _WeaponDir;
     Vector3 _myScale;
-    RaycastHit2D[] _targets;
+    float _resultDamage;
+
     public DB Data1 { get => Data; set => Data = value; }
     public float Dmg { get => _dmg; set => _dmg = value; }
     public int Level { get => _level; set => _level = value; }
     public bool Passive { get => _Passive; set => _Passive = value; }
+    public float ResultDamage { get => _resultDamage; set => _resultDamage = value; }
 
     public void DestoryPrefab()
     {
@@ -64,22 +65,27 @@ public class SkillData : MonoBehaviour
             if (MapManager.instance._MySkill[i]._weapon == _WeaponType)
             {
                 _level = MapManager.instance._MySkill[i].currectLevel;
-                Data._Damage = MapManager.instance._MySkill[i]._skills[MapManager.instance._MySkill[i].currectLevel]._Damage + MapManager.instance.CommonDamage;
+                Data._Damage = MapManager.instance._MySkill[i]._skills[MapManager.instance._MySkill[i].currectLevel]._Damage;
                 break;
             }
         }
+
+        ResultDamage = Data._Damage + MapManager.instance.CommonDamage;
 
         if (_Passive) return;
 
         transform.localScale = new Vector3(_myScale.x + MapManager.instance.MagicSize, _myScale.y + MapManager.instance.MagicSize, _myScale.z + MapManager.instance.MagicSize);
     }
 
+    private void Start()
+    {
+        _myScale = transform.localScale;
+    }
+
     private void OnEnable()
     {
         if (_Passive) return;
-        _myScale = transform.localScale;
         _rigid = transform.GetComponent<Rigidbody2D>();
-        _col = transform.GetComponent<BoxCollider2D>();
         if (Data.WeaponType == WeaponType.관통 || Data.WeaponType == WeaponType.갈래공격 || Data.WeaponType == WeaponType.세갈래공격)
         {
             _dir = MapManager.instance._player.Scanner.nearestTarget.position;

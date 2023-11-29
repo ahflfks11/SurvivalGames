@@ -41,6 +41,7 @@ public class AP_DemoSpawn : MonoBehaviour {
 	bool _isBattleUIActive;
 	float nextSpawn;
 	Rigidbody myRigidbody;
+	SkillData _skillData;
 
     public int Level { get => _level; set => _level = value; }
     public int WeaponNumber { get => _WeaponNumber; set => _WeaponNumber = value; }
@@ -65,6 +66,8 @@ public class AP_DemoSpawn : MonoBehaviour {
     void Update () {
 		if (spawnPrefab == null || _Type == SpawnType.None) return;
 
+		if (_skillData == null && _Type == SpawnType.Weapon) _skillData = spawnPrefab.GetComponent<SkillData>();
+
 		if (_Type == SpawnType.Monster)
         {
 			Monster _MobData = spawnPrefab.GetComponent<Monster>();
@@ -83,9 +86,9 @@ public class AP_DemoSpawn : MonoBehaviour {
 					_isBattleUIActive = false;
 				}
 			}
-        }
+        }	
 
-		if (MapManager.instance._player.Scanner.nearestTarget == null && _Type == SpawnType.Weapon)
+		if (MapManager.instance._player.Scanner.nearestTarget == null && _Type == SpawnType.Weapon && (int)_skillData.Data1.WeaponType < 8)
 			return;
 
 		if (MapManager.instance.Min < SpawnTime)

@@ -22,6 +22,7 @@ public class Monster : MonoBehaviour
     Data _Data;
 
     bool Knowback;
+    bool _isDead;
     float _RecentHP;
     float _durationTime = 0.02f;
     float _TempDurationTime = 0f;
@@ -30,6 +31,7 @@ public class Monster : MonoBehaviour
     WaitForFixedUpdate _CorutinTime;
 
     public Data Data { get => _Data; set => _Data = value; }
+    public bool IsDead { get => _isDead; set => _isDead = value; }
 
     private void Awake()
     {
@@ -51,6 +53,7 @@ public class Monster : MonoBehaviour
 
         if (_AniController.GetCurrentAnimatorStateInfo(0).IsName("Death"))
         {
+            IsDead = true;
             if (_AniController.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f)
             {
                 MapManager.instance.MobManager[(int)Data._MonsterType].poolBlock.size -= 1;
@@ -114,7 +117,7 @@ public class Monster : MonoBehaviour
         if (collision.GetComponent<SkillData>().Data1._SpecialAttack)
             return;
 
-        HitDamage(collision.GetComponent<SkillData>().Data1._Damage, true);
+        HitDamage(collision.GetComponent<SkillData>().ResultDamage, true);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -127,7 +130,7 @@ public class Monster : MonoBehaviour
 
         if(_TempDurationTime <= 0)
         {
-            HitDamage(collision.GetComponent<SkillData>().Data1._Damage, false);
+            HitDamage(collision.GetComponent<SkillData>().ResultDamage, false);
             _TempDurationTime = _durationTime;
         }
     }

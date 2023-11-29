@@ -108,7 +108,9 @@ public class CharaterData : MonoBehaviour
 
         if (_tempDurationTime <= 0)
         {
-            HitDamage(collision.gameObject.GetComponent<Monster>().Data._Damage);
+            Monster _Monster = collision.gameObject.GetComponent<Monster>();
+            if (_Monster.IsDead) return;
+            HitDamage(_Monster.Data._Damage);
             _tempDurationTime = _durationTime;
         }
     }
