@@ -6,7 +6,7 @@ public class BossPattern : MonoBehaviour
     public enum Pattern
     {
         None = 0,
-        Attack
+        Running
     }
 
     [System.Serializable]
