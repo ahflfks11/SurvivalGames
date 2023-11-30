@@ -16,7 +16,8 @@ public class SkillData : MonoBehaviour
         세갈래공격,
         제자리_다단공격,
         제자리_특수공격,
-        랜덤_스폰
+        랜덤_스폰,
+        패시브
     };
 
     [System.Serializable]
@@ -111,7 +112,7 @@ public class SkillData : MonoBehaviour
         {
             _rigid.velocity = Vector2.down * Data.Power;
         }
-        else if (Data.WeaponType == WeaponType.제자리_다단공격)
+        else if (Data.WeaponType == WeaponType.제자리_다단공격 || Data.WeaponType == WeaponType.패시브)
         {
             transform.SetParent(MapManager.instance._player.transform);
             transform.localPosition = Vector3.zero;

@@ -12,7 +12,8 @@ public class Passive_Stat : MonoBehaviour
         Speed,
         MagicSize,
         MagnetRange,
-        CommonDamage
+        CommonDamage,
+        SpawnCoolTime
     }
 
     [SerializeField]
@@ -48,6 +49,9 @@ public class Passive_Stat : MonoBehaviour
                     break;
                 case StatTypes.CommonDamage:
                     MapManager.instance.CommonDamageUp(_skillData.Data1._Damage);
+                    break;
+                case StatTypes.SpawnCoolTime:
+                    MapManager.instance.ChangeInterval(_skillData.Data1._Damage);
                     break;
             }
             level = _skillData.Level;

@@ -34,7 +34,8 @@ public class MapManager : MonoBehaviour
         Passive_MagicSize,
         Passive_Damage,
         bomb,
-        WeaponAttack
+        WeaponAttack,
+        CoolDown
     };
 
     [System.Serializable]
@@ -92,16 +93,23 @@ public class MapManager : MonoBehaviour
 
     float _CommonDamage = 0f;
 
+    [SerializeField]
+    float _SpawnInterval;
+
     public int Min { get => min; set => min = value; }
     public int Sec { get => sec; set => sec = value; }
     public float MagicSize { get => _MagicSize; set => _MagicSize = value; }
     public float CommonDamage { get => _CommonDamage; set => _CommonDamage = value; }
+    public float SpawnInterval { get => _SpawnInterval; set => _SpawnInterval = value; }
 
     private void Awake()
     {
         instance = this;
-        _MapTileSet.m_TilingRules[0].m_PerlinScale = Random.Range(0.01f, 0.999f);
+
+        ChangeMap();
+
         Application.targetFrameRate = 60;
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
         GameObject[] _MonsterPool = GameObject.FindGameObjectsWithTag("MonsterPool");
         GameObject[] _WeaponPool = GameObject.FindGameObjectsWithTag("WeaponPool");
@@ -122,6 +130,11 @@ public class MapManager : MonoBehaviour
         SetReSolution();
     }
 
+    public void ChangeMap()
+    {
+        _MapTileSet.m_TilingRules[0].m_PerlinScale = Random.Range(0.01f, 0.999f);
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
@@ -138,6 +151,23 @@ public class MapManager : MonoBehaviour
                 Time.timeScale = 0;
             else
                 Time.timeScale = 1f;
+        }
+    }
+
+    public void ChangeInterval(float _value)
+    {
+        SpawnInterval += _value;
+
+        AP_DemoSpawn[] _Weapons = _player._WeaponSpawner.GetComponents<AP_DemoSpawn>();
+
+        foreach (AP_DemoSpawn _WeaponSkill in _Weapons)
+        {
+            if (!_WeaponSkill.spawnPrefab.GetComponent<SkillData>().Passive)
+            {
+                _WeaponSkill.spawnInterval = _WeaponSkill.spawnInterval - _value >= 0.2f ? _WeaponSkill.spawnInterval -= _value : _WeaponSkill.spawnInterval = 0.2f;
+                _WeaponSkill.spawnInterval = Mathf.Floor(_WeaponSkill.spawnInterval * 100f) / 100f;
+            }
+
         }
     }
 

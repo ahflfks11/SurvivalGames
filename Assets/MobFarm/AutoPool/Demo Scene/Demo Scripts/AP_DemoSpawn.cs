@@ -26,6 +26,7 @@ public class AP_DemoSpawn : MonoBehaviour {
 	int SpawnTimeMax;
 	[SerializeField]
 	float _dmg = -1f;
+	float _TempSpawnInterval;
 	public float spawnInterval;
 	public float spawnVelocity;
 	public float spawnAngleError;
@@ -56,10 +57,14 @@ public class AP_DemoSpawn : MonoBehaviour {
 
     private void OnEnable()
     {
-        if (_Type == SpawnType.Monster)
-        {
+		if (_Type == SpawnType.Monster)
+		{
 			SpawnTime = spawnPrefab.GetComponent<Monster>().Data.SpawnLevel;
 			SpawnTimeMax = spawnPrefab.GetComponent<Monster>().Data.SpawnLimitLevel;
+		}
+		else if (_Type == SpawnType.Weapon)
+		{
+			_TempSpawnInterval = -1;
 		}
 	}
 
@@ -68,8 +73,9 @@ public class AP_DemoSpawn : MonoBehaviour {
 
 		if (_skillData == null && _Type == SpawnType.Weapon) _skillData = spawnPrefab.GetComponent<SkillData>();
 
+		//특수효과
 		if (_Type == SpawnType.Monster)
-        {
+		{
 			Monster _MobData = spawnPrefab.GetComponent<Monster>();
 
 			if (_MobData.Data._PopupText != null)
@@ -86,7 +92,7 @@ public class AP_DemoSpawn : MonoBehaviour {
 					_isBattleUIActive = false;
 				}
 			}
-        }	
+		}
 
 		if (MapManager.instance._player.Scanner.nearestTarget == null && _Type == SpawnType.Weapon && (int)_skillData.Data1.WeaponType < 8)
 			return;

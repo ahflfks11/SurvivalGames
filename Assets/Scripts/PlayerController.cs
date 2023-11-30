@@ -170,7 +170,10 @@ public class PlayerController : MonoBehaviour
                 _spawnerConfig.spawnPrefab = _SkillPrefab;
                 _spawnerConfig._Type = SpawnType.Weapon;
                 _spawnerConfig.randomChild = true;
-                _spawnerConfig.spawnInterval = _skillData._skill[0]._CoolTime;
+                if (_skillData._skill[0]._CoolTime - MapManager.instance.SpawnInterval <= 0)
+                    _spawnerConfig.spawnInterval = 0.2f;
+                else
+                    _spawnerConfig.spawnInterval = _skillData._skill[0]._CoolTime - MapManager.instance.SpawnInterval;
                 break;
             }
         }
