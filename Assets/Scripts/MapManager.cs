@@ -96,11 +96,14 @@ public class MapManager : MonoBehaviour
     [SerializeField]
     float _SpawnInterval;
 
+    BossPattern _bossList;
+
     public int Min { get => min; set => min = value; }
     public int Sec { get => sec; set => sec = value; }
     public float MagicSize { get => _MagicSize; set => _MagicSize = value; }
     public float CommonDamage { get => _CommonDamage; set => _CommonDamage = value; }
     public float SpawnInterval { get => _SpawnInterval; set => _SpawnInterval = value; }
+    public BossPattern BossList { get => _bossList; set => _bossList = value; }
 
     private void Awake()
     {
@@ -126,7 +129,7 @@ public class MapManager : MonoBehaviour
             WeaponManager[i] = _WeaponPool[i].GetComponent<AP_Pool>();
 
         _MySkill = new List<MySkillList>();
-
+        BossList = transform.GetComponent<BossPattern>();
         SetReSolution();
     }
 
