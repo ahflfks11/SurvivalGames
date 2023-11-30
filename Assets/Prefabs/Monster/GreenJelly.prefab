@@ -5019,8 +5019,9 @@ MonoBehaviour:
     _Speed: 1.5
     _Resistance: 0.1
     SpawnLevel: 0
-    SpawnLimitLevel: 0
+    SpawnLimitLevel: 4
     exp: 1
+    _PopupText: 
 --- !u!114 &9002819688718974964
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5047,15 +5047,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Data:
-    _HP: 14
+    _HP: 20
     _MonsterType: 2
     _Damage: 2
     _Speed: 2
     _Resistance: 0.001
     SpawnLevel: 4
     SpawnLimitLevel: 0
-    exp: 3
-    _PopupText: 
+    exp: 1
+    _PopupText: "\uC8FC\uBCC0\uC774 \uC18C\uB780\uC2A4\uB7EC\uC6CC\uC694. \uBB34\uC2A8
+      \uC77C\uC774\uC8E0?"
 --- !u!114 &5258640240207685685
 MonoBehaviour:
   m_ObjectHideFlags: 0

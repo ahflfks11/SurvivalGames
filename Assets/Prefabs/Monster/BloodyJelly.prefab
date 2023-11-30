@@ -5114,7 +5114,7 @@ MonoBehaviour:
     SpawnLevel: 2
     SpawnLimitLevel: 3
     exp: 0
-    _PopupText: "\uBB34\uC5B8\uAC00 \uBAB0\uB824\uC635\uB2C8\uB2E4. \uC900\uBE44\uD558\uC138\uC694!"
+    _PopupText: "\uBB34\uC5B8\uAC00\uAC00 \uBAB0\uB824\uC635\uB2C8\uB2E4. \uC870\uC2EC\uD574\uC57C\uACA0\uC5B4\uC694."
 --- !u!114 &4821020714685372153
 MonoBehaviour:
   m_ObjectHideFlags: 0
