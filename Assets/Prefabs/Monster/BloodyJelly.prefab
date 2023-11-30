@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3701703791755853575}
   - component: {fileID: 1247869017991914288}
   - component: {fileID: 491344107050249127}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: JumpDust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4883,7 +4883,7 @@ GameObject:
   - component: {fileID: 2233689962251533379}
   - component: {fileID: 2233689962251533378}
   - component: {fileID: 2233689962251533389}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5141,7 +5141,7 @@ GameObject:
   - component: {fileID: 7801204700191352248}
   - component: {fileID: 523591508923404971}
   - component: {fileID: 1515868350537410534}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MoveDust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9953,7 +9953,7 @@ GameObject:
   - component: {fileID: 2996786544193702044}
   - component: {fileID: 1049547868987647275}
   - component: {fileID: 1685189710820137956}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 'JumpDust '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
