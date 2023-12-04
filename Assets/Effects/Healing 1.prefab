@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8423171380201173030}
   - component: {fileID: 5182520880352641471}
   - component: {fileID: 8943910104421664170}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4835,7 +4835,7 @@ GameObject:
   - component: {fileID: 6996031384299870076}
   - component: {fileID: 6978832780501207937}
   - component: {fileID: 1762680016792367986}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9659,7 +9659,7 @@ GameObject:
   - component: {fileID: 422641101048791812}
   - component: {fileID: 263092383750649109}
   - component: {fileID: 1708748915673999569}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Healing 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14443,7 +14443,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 8
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0

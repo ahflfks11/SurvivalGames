@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,7 +25,7 @@ public class Monster : MonoBehaviour
     bool Knowback;
     bool _isDead;
     float _RecentHP;
-    float _durationTime = 0.01f;
+    float _durationTime = 0.2f;
     float _TempDurationTime = 0f;
     Rigidbody2D _rigid;
     Animator _AniController;
@@ -40,7 +41,7 @@ public class Monster : MonoBehaviour
 
     private void OnEnable()
     {
-        //_RecentHP = Data._HP + MapManager.instance.Min;
+        _RecentHP = Data._HP;
         _rigid = transform.GetComponent<Rigidbody2D>();
         _AniController = transform.GetComponent<Animator>();
         //Coin
@@ -81,6 +82,7 @@ public class Monster : MonoBehaviour
 
     private void LateUpdate()
     {
+        Math.Truncate(_RecentHP);
         if (MapManager.instance._player.Rigid.position.x > _rigid.position.x)
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         else
@@ -128,7 +130,7 @@ public class Monster : MonoBehaviour
         if (!collision.GetComponent<SkillData>().Data1._SpecialAttack)
             return;
 
-        if(_TempDurationTime <= 0)
+        if (_TempDurationTime <= 0)
         {
             HitDamage(collision.GetComponent<SkillData>().ResultDamage, false);
             _TempDurationTime = _durationTime;

@@ -12,6 +12,7 @@ TagManager:
   - MonsterPool
   - PlayerFire
   - Item_Pool
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -29,7 +30,7 @@ TagManager:
   - Items
   - Area
   - Transition
-  - 
+  - Boss
   - 
   - 
   - 
