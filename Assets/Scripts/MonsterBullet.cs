@@ -6,6 +6,7 @@ public class MonsterBullet : MonoBehaviour
 {
     float _Speed = 3f;
     public int _Number = -1;
+    public float _damage;
 
     private void Update()
     {

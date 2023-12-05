@@ -30,6 +30,7 @@ public class Monster : MonoBehaviour
     Rigidbody2D _rigid;
     Animator _AniController;
     WaitForFixedUpdate _CorutinTime;
+    AudioSource _myAudio;
 
     public Data Data { get => _Data; set => _Data = value; }
     public bool IsDead { get => _isDead; set => _isDead = value; }
@@ -44,6 +45,7 @@ public class Monster : MonoBehaviour
         _RecentHP = Data._HP;
         _rigid = transform.GetComponent<Rigidbody2D>();
         _AniController = transform.GetComponent<Animator>();
+        _myAudio = transform.GetComponent<AudioSource>();
         //Coin
         MF_AutoPool.InitializeSpawn(MapManager.instance.items[0].gameObject, 0, 0);
     }
@@ -89,6 +91,12 @@ public class Monster : MonoBehaviour
             transform.rotation = Quaternion.Euler(new Vector3(0, -180f, 0));
     }
 
+    public void SFX(int _number)
+    {
+        if (!_myAudio.isPlaying)
+            _myAudio.PlayOneShot(MapManager.instance._vfx[_number]);
+    }
+
     IEnumerator KnockBack()
     {
         yield return _CorutinTime;
@@ -107,6 +115,7 @@ public class Monster : MonoBehaviour
         }
         else
         {
+            //SFX(0);
             _AniController.SetTrigger("Death");
         }
     }

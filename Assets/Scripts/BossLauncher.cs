@@ -11,6 +11,8 @@ public class BossLauncher : MonoBehaviour
     [SerializeField]
     BossPattern.Pattern _NowPattern;
     SpriteRenderer _renderer;
+    public Material _defaultMat;
+    public Material _hitMat;
     public string _Name;
     public float Speed;
     public float _AttackRange;
@@ -21,6 +23,7 @@ public class BossLauncher : MonoBehaviour
     public Transform _TranPos;
     Animator _AniController;
     bool _IsPattern;
+    bool isAlive = true;
     bool _isSkilling;
     [SerializeField]
     bool _isAttack;
@@ -28,6 +31,8 @@ public class BossLauncher : MonoBehaviour
     Collider2D _myColider;
     float _durationTime = 0.2f;
     float _TempDurationTime = 0f;
+    float _hitTime = 0.05f;
+    float _tempHitTime = 0f;
     float _AttackSpeed = 1f;
     float _TempAttackSpeed;
     float _damage;
@@ -39,6 +44,7 @@ public class BossLauncher : MonoBehaviour
     MonsterSkillData _skillData;
     
     public string _bossComment;
+    public bool _isLastBoss;
 
     public float Damage { get => _damage; set => _damage = value; }
     public bool IsAttack { get => _isAttack; set => _isAttack = value; }
@@ -59,9 +65,10 @@ public class BossLauncher : MonoBehaviour
 
     private void Update()
     {
+        if (!isAlive) return;
         if (_AniController.GetCurrentAnimatorStateInfo(0).IsName("Attack") || _AniController.GetCurrentAnimatorStateInfo(0).IsName("Teleport_Attack"))
         {
-            if(_AniController.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.2f)
+            if(_AniController.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.5f)
             {
                 _isAttack = true;
             }
@@ -69,6 +76,16 @@ public class BossLauncher : MonoBehaviour
         else
         {
             _isAttack = false;
+        }
+
+        if(_tempHitTime <= 0f)
+        {
+            _renderer.material = _defaultMat;
+        }
+        else
+        {
+            _tempHitTime -= Time.deltaTime;
+            _renderer.material = _hitMat;
         }
 
         if (!_IsPattern)
@@ -183,8 +200,9 @@ public class BossLauncher : MonoBehaviour
                         yield return new WaitForSeconds(_Pattern[patternNumber].waitingTime);
                         Vector3 _dir = transform.position - _TranPos.position;
                         transform.position = MapManager.instance._player.transform.position + _dir;
-                        _myColider.enabled = true;
+                        yield return new WaitForSeconds(0.8f);
                         _AniController.SetTrigger("Teleport_Attack");
+                        _myColider.enabled = true;
                         yield return new WaitForSeconds(_Pattern[patternNumber]._durationTime);
                         _IsPattern = false;
                         _isSkilling = false;
@@ -225,10 +243,13 @@ public class BossLauncher : MonoBehaviour
     public void HitDamage(float _dmg, bool _KnockBack)
     {
         _RecentHP -= _dmg;
-
+        _tempHitTime = _hitTime;
         if (_RecentHP <= 0)
         {
             _AniController.SetTrigger("Death");
+            isAlive = false;
+            if (_isLastBoss)
+                MapManager.instance.BossAlive = false;
         }
     }
 

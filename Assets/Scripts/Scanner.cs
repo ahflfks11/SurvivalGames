@@ -11,6 +11,7 @@ public class Scanner : MonoBehaviour
     float _CurTime = 3f;
     float _tempItemScanRange;
     public LayerMask targetLayer;
+    public LayerMask bossLayer;
     public LayerMask itemLayer;
     public RaycastHit2D[] targets;
     public RaycastHit2D[] ItemScan;
@@ -35,7 +36,7 @@ public class Scanner : MonoBehaviour
 
     private void LateUpdate()
     {
-        targets = Physics2D.CircleCastAll(transform.position, scanRange, Vector2.zero, 0, targetLayer);
+        targets = Physics2D.CircleCastAll(transform.position, scanRange, Vector2.zero, 0, LayerMask.GetMask("Enermy", "Boss"));
         ItemScan = Physics2D.CircleCastAll(transform.position, itemScanRange, Vector2.zero, 0, itemLayer);
         nearestTarget = GetNearest();
         //if (ItemScan.Length != 0)

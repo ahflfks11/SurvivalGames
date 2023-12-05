@@ -173,16 +173,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Pattern: []
   _NowPattern: 0
+  _defaultMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  _hitMat: {fileID: 2100000, guid: df431553f2ee19748962d15863c616a0, type: 2}
   _Name: DeadMan
   Speed: 2
   _AttackRange: 4
-  SpawnLevel: 1
+  SpawnLevel: 10
+  SpawnLimitLevel: 0
   _CastCoolTime: []
   _TranPos: {fileID: 5698500415672737309}
   _isAttack: 0
   _patternCount: -1
   _RecentHP: 0
-  _bossComment: "\uBCF4\uC2A4\uAC00 \uB4F1\uC7A5!"
+  _bossComment: "\uAC70\uB300\uD55C \uAE30\uC6B4\uC774 \uB290\uAEF4\uC838\uC694!"
+  _isLastBoss: 1
 --- !u!114 &5698500416473919617
 MonoBehaviour:
   m_ObjectHideFlags: 0

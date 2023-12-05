@@ -85,6 +85,9 @@ public class MapManager : MonoBehaviour
 
     [SerializeField]
     public List<SkillList> _skillList;
+
+    public List<AudioClip> _vfx;
+
     int min;
     int sec;
 
@@ -97,6 +100,7 @@ public class MapManager : MonoBehaviour
     float _SpawnInterval;
 
     BossPattern _bossList;
+    bool _BossAlive = true;
 
     public int Min { get => min; set => min = value; }
     public int Sec { get => sec; set => sec = value; }
@@ -104,6 +108,7 @@ public class MapManager : MonoBehaviour
     public float CommonDamage { get => _CommonDamage; set => _CommonDamage = value; }
     public float SpawnInterval { get => _SpawnInterval; set => _SpawnInterval = value; }
     public BossPattern BossList { get => _bossList; set => _bossList = value; }
+    public bool BossAlive { get => _BossAlive; set => _BossAlive = value; }
 
     private void Awake()
     {

@@ -123,13 +123,20 @@ public class CharaterData : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Boss"))
+        if (!collision.CompareTag("Boss") && !collision.CompareTag("MonsterWeapon"))
             return;
 
-        if (collision.GetComponent<BossLauncher>().IsAttack)
+        if (collision.CompareTag("Boss"))
         {
-            HitDamage(collision.GetComponent<BossLauncher>().Damage);
-            _tempDurationTime = _durationTime;
+            if (collision.GetComponent<BossLauncher>().IsAttack)
+            {
+                HitDamage(collision.GetComponent<BossLauncher>().Damage);
+                _tempDurationTime = _durationTime;
+            }
+        }
+        else
+        {
+            HitDamage(collision.GetComponent<MonsterBullet>()._damage);
         }
     }
 
