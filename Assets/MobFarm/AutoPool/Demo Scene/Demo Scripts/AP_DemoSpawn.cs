@@ -6,7 +6,8 @@ public enum SpawnType
 	None,
 	Monster,
 	Weapon,
-	Item
+	Item,
+	Boss
 };
 
 public class AP_DemoSpawn : MonoBehaviour {
@@ -62,6 +63,11 @@ public class AP_DemoSpawn : MonoBehaviour {
 			SpawnTime = spawnPrefab.GetComponent<Monster>().Data.SpawnLevel;
 			SpawnTimeMax = spawnPrefab.GetComponent<Monster>().Data.SpawnLimitLevel;
 		}
+		else if (_Type == SpawnType.Boss)
+		{
+			SpawnTime = spawnPrefab.GetComponent<BossLauncher>().SpawnLevel;
+			SpawnTimeMax = spawnPrefab.GetComponent<BossLauncher>().SpawnLimitLevel;
+		}
 		else if (_Type == SpawnType.Weapon)
 		{
 			_TempSpawnInterval = -1;
@@ -93,6 +99,25 @@ public class AP_DemoSpawn : MonoBehaviour {
 				}
 			}
 		}
+		else if (_Type == SpawnType.Boss)
+		{
+			BossLauncher _MobData = spawnPrefab.GetComponent<BossLauncher>();
+
+			if (_MobData._bossComment != null)
+			{
+				if (_MobData.SpawnLevel - 1 == MapManager.instance.Min && MapManager.instance.Sec >= 30f)
+				{
+					MapManager.instance._uiManager.BattleUI(_MobData._bossComment);
+					_isBattleUIActive = true;
+				}
+
+				if (_MobData.SpawnLevel - 1 < MapManager.instance.Min && _isBattleUIActive)
+				{
+					MapManager.instance._uiManager.BattleUI("");
+					_isBattleUIActive = false;
+				}
+			}
+		}
 
 		if (MapManager.instance._player.Scanner.nearestTarget == null && _Type == SpawnType.Weapon && (int)_skillData.Data1.WeaponType < 8)
 			return;
@@ -100,7 +125,7 @@ public class AP_DemoSpawn : MonoBehaviour {
 		if (MapManager.instance.Min < SpawnTime)
 			return;
 
-		if (_Type == SpawnType.Monster)
+		if (_Type == SpawnType.Monster || _Type == SpawnType.Boss)
 		{
 			if (SpawnTimeMax != 0 && MapManager.instance.Min >= SpawnTimeMax)
 				return;
@@ -134,7 +159,7 @@ public class AP_DemoSpawn : MonoBehaviour {
 					//obj.GetComponent<SkillData>().MySpanwer = this;
 				}
 			}
-			else if (_Type == SpawnType.Monster)
+			else if (_Type == SpawnType.Monster || _Type == SpawnType.Boss)
 			{
 				int _SpawnNumber = Random.Range(0, MapManager.instance._player._SpawnPoint.Length);
 				int _randomSpawnCounter = _randomCounterSpawn ? _randomSpawnCounter = Random.Range(1, _ShootingCounter) : _randomSpawnCounter = ShootingCounter;
@@ -143,9 +168,9 @@ public class AP_DemoSpawn : MonoBehaviour {
 				{
 					obj = MF_AutoPool.Spawn(spawnPrefab, Random.Range(0, 3), new Vector3(MapManager.instance._player._SpawnPoint[_SpawnNumber].position.x - Random.Range(_spawnPosX, _Max_spawnPosX), MapManager.instance._player._SpawnPoint[_SpawnNumber].position.y - Random.Range(_spawnPosY, _Max_SpawnPosY), MapManager.instance._player._SpawnPoint[_SpawnNumber].position.z), Quaternion.identity);
 				}
-            }
-            else
-            {
+			}
+			else
+			{
 				int _randomSpawn = Random.Range(0, 3);
 
 				if (_randomSpawn < 1)

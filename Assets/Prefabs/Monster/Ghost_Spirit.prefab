@@ -234,7 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Data:
-    _HP: 150
+    _HP: 40
     _MonsterType: 3
     _Damage: 4
     _Speed: 3

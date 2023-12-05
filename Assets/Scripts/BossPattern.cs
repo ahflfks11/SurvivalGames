@@ -20,6 +20,7 @@ public class BossPattern : MonoBehaviour
         public float castRate;
         public float PatternHP;
         public float _Damage;
+        public string _skillName;
         public string _Comment;
     }
 

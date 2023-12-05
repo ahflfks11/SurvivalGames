@@ -12,15 +12,18 @@ public class BossLauncher : MonoBehaviour
     BossPattern.Pattern _NowPattern;
     SpriteRenderer _renderer;
     public string _Name;
-    public float _Damage;
     public float Speed;
     public float _AttackRange;
+    public int SpawnLevel;
+    public int SpawnLimitLevel;
     public float[] _CastCoolTime;
     Rigidbody2D _rigid;
     public Transform _TranPos;
     Animator _AniController;
     bool _IsPattern;
     bool _isSkilling;
+    [SerializeField]
+    bool _isAttack;
     Coroutine _Corutine_BossPattern;
     Collider2D _myColider;
     float _durationTime = 0.2f;
@@ -30,11 +33,15 @@ public class BossLauncher : MonoBehaviour
     float _damage;
     [SerializeField]
     int _patternCount = -1;
-
+    
     public float _RecentHP;
     WaitForFixedUpdate _CorutinTime;
+    MonsterSkillData _skillData;
+    
+    public string _bossComment;
 
     public float Damage { get => _damage; set => _damage = value; }
+    public bool IsAttack { get => _isAttack; set => _isAttack = value; }
 
     private void Start()
     {
@@ -46,11 +53,24 @@ public class BossLauncher : MonoBehaviour
         _myColider = transform.GetComponent<Collider2D>();
         _AniController = transform.GetComponent<Animator>();
         _renderer = transform.GetComponent<SpriteRenderer>();
+        _skillData = transform.GetComponent<MonsterSkillData>();
         _Corutine_BossPattern = StartCoroutine(PatternLauncher());
     }
 
     private void Update()
     {
+        if (_AniController.GetCurrentAnimatorStateInfo(0).IsName("Attack") || _AniController.GetCurrentAnimatorStateInfo(0).IsName("Teleport_Attack"))
+        {
+            if(_AniController.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.2f)
+            {
+                _isAttack = true;
+            }
+        }
+        else
+        {
+            _isAttack = false;
+        }
+
         if (!_IsPattern)
         {
             _patternCount = MapManager.instance.BossList.Boss_PatternCount(this.gameObject, _Name, _RecentHP);
@@ -66,7 +86,6 @@ public class BossLauncher : MonoBehaviour
             if (!_isSkilling)
             {
                 int Rnd_Skill = UnityEngine.Random.Range(0, _patternCount + 1);
-                Debug.Log(Rnd_Skill);
                 if (_CastCoolTime[Rnd_Skill] <= 0)
                 {
                     _isSkilling = true;
@@ -133,37 +152,66 @@ public class BossLauncher : MonoBehaviour
         {
             if (_isSkilling)
             {
-                Debug.Log(_NowPattern);
+                int patternNumber = _patternCount;
 
                 switch (_NowPattern)
                 {
                     case BossPattern.Pattern.None:
+                        _damage = MapManager.instance.BossList.Boss_NormalDamage(this.gameObject, _Name);
                         yield return new WaitForSeconds(_Pattern[_patternCount].waitingTime);
                         _IsPattern = false;
                         _isSkilling = false;
                         break;
                     case BossPattern.Pattern.Teleporting:
                         _AniController.SetBool("Run", false);
+
+                        patternNumber = _patternCount;
+
+                        for(int i=0; i<_Pattern.Length; i++)
+                        {
+                            if(_Pattern[i]._BossPattern == _NowPattern)
+                            {
+                                patternNumber = i;
+                                _damage = _Pattern[i]._Damage;
+                                break;
+                            }
+                        }
+
                         _IsPattern = true;
                         _AniController.SetTrigger("Teleport");
                         _myColider.enabled = false;
-                        yield return new WaitForSeconds(_Pattern[_patternCount].waitingTime);
+                        yield return new WaitForSeconds(_Pattern[patternNumber].waitingTime);
                         Vector3 _dir = transform.position - _TranPos.position;
                         transform.position = MapManager.instance._player.transform.position + _dir;
                         _myColider.enabled = true;
                         _AniController.SetTrigger("Teleport_Attack");
-                        yield return new WaitForSeconds(_Pattern[_patternCount]._durationTime);
+                        yield return new WaitForSeconds(_Pattern[patternNumber]._durationTime);
                         _IsPattern = false;
                         _isSkilling = false;
-                        Debug.Log(_NowPattern);
                         break;
                     case BossPattern.Pattern.Magic:
                         _AniController.SetBool("Run", false);
+
+                        for (int i = 0; i < _Pattern.Length; i++)
+                        {
+                            if (_Pattern[i]._BossPattern == _NowPattern)
+                            {
+                                patternNumber = i;
+                                _damage = _Pattern[i]._Damage;
+                                break;
+                            }
+                        }
+
                         _IsPattern = true;
                         _AniController.SetBool("Pattern1_Ready", true);
-                        yield return new WaitForSeconds(_Pattern[_patternCount].waitingTime);
+                        yield return new WaitForSeconds(_Pattern[patternNumber].waitingTime);
+                        _skillData.SpawnWeaponMethod(8);
+                        yield return new WaitForSeconds(1f);
+                        _skillData.SpawnWeaponMethod(8);
+                        yield return new WaitForSeconds(1f);
+                        _skillData.SpawnWeaponMethod(8);
+                        yield return new WaitForSeconds(_Pattern[patternNumber]._durationTime);
                         _AniController.SetBool("Pattern1_Ready", false);
-                        yield return new WaitForSeconds(_Pattern[_patternCount]._durationTime);
                         _IsPattern = false;
                         _isSkilling = false;
                         break;

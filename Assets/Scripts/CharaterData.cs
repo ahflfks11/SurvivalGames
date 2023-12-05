@@ -102,6 +102,7 @@ public class CharaterData : MonoBehaviour
             return;
 
         HitDamage(collision.gameObject.GetComponent<Monster>().Data._Damage);
+
         _tempDurationTime = _durationTime;
     }
 
@@ -115,6 +116,33 @@ public class CharaterData : MonoBehaviour
             Monster _Monster = collision.gameObject.GetComponent<Monster>();
             if (_Monster.IsDead) return;
             HitDamage(_Monster.Data._Damage);
+
+            _tempDurationTime = _durationTime;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Boss"))
+            return;
+
+        if (collision.GetComponent<BossLauncher>().IsAttack)
+        {
+            HitDamage(collision.GetComponent<BossLauncher>().Damage);
+            _tempDurationTime = _durationTime;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Boss"))
+            return;
+
+        if (_tempDurationTime <= 0)
+        {
+            BossLauncher _Monster = collision.gameObject.GetComponent<BossLauncher>();
+            HitDamage(_Monster.Damage);
+
             _tempDurationTime = _durationTime;
         }
     }
