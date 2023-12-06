@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2601310586672632602}
   - component: {fileID: 2601310586672632603}
   - component: {fileID: 2601310586672632596}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,7 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Data:
-    _HP: 10
+    _HP: 15
     _MonsterType: 3
     _Damage: 4
     _Speed: 3
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 2603032478873695840}
   - component: {fileID: 4776246125642765469}
   - component: {fileID: 6075969675771631570}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: JumpDust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5125,7 +5125,7 @@ GameObject:
   - component: {fileID: 2993367210783018131}
   - component: {fileID: 7790927805778366576}
   - component: {fileID: 8338992114926911841}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MoveDust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9937,7 +9937,7 @@ GameObject:
   - component: {fileID: 413360374474242308}
   - component: {fileID: 7906594591841573254}
   - component: {fileID: 3205279057745232564}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 'JumpDust '
   m_TagString: Untagged
   m_Icon: {fileID: 0}

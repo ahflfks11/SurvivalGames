@@ -7,11 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SSU_Demo_SineScale
+  m_Name: SSU_Demo_SineScale 1
   m_Shader: {fileID: 4800000, guid: bb134d7d4389e3a45a6c49e898a344a4, type: 3}
   m_ValidKeywords:
   - _ENABLEOUTEROUTLINE_ON
-  - _ENABLESINESCALE_ON
   - _ISTEXT_ON
   - _SHADERFADING_NONE
   - _SHADERSPACE_UV
@@ -144,7 +143,7 @@ Material:
     - PixelSnap: 0
     - _AddColorContrast: 0.5
     - _AddColorContrastToggle: 0
-    - _AddColorFade: 1
+    - _AddColorFade: 0
     - _AddColorMaskToggle: 0
     - _AddHueBrightness: 2
     - _AddHueContrast: 0.5
@@ -255,7 +254,7 @@ Material:
     - _EnableSineGlow: 0
     - _EnableSineMove: 0
     - _EnableSineRotate: 0
-    - _EnableSineScale: 1
+    - _EnableSineScale: 0
     - _EnableSmoke: 0
     - _EnableSmoothPixelArt: 0
     - _EnableSourceAlphaDissolve: 0
@@ -569,8 +568,8 @@ Material:
     - _InnerOutlineNoiseScale: {r: 5, g: 5, b: 0, a: 0}
     - _InnerOutlineNoiseSpeed: {r: 0, g: 0.05, b: 0, a: 0}
     - _InnerOutlineTextureSpeed: {r: 0, g: 0.5, b: 0, a: 0}
-    - _MetalColor: {r: 5.992157, g: 3.639216, b: 0.3137255, a: 1}
-    - _MetalHighlightColor: {r: 5.992157, g: 3.796078, b: 0.6588235, a: 1}
+    - _MetalColor: {r: 0, g: 0, b: 0, a: 1}
+    - _MetalHighlightColor: {r: 0.7783746, g: 1.7411011, b: 0, a: 1}
     - _MetalNoiseDistortion: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _MetalNoiseDistortionScale: {r: 0.2, g: 0.2, b: 0, a: 0}
     - _MetalNoiseDistortionSpeed: {r: -0.05, g: -0.05, b: 0, a: 0}

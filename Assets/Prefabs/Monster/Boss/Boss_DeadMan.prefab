@@ -187,6 +187,7 @@ MonoBehaviour:
   _RecentHP: 0
   _bossComment: "\uAC70\uB300\uD55C \uAE30\uC6B4\uC774 \uB290\uAEF4\uC838\uC694!"
   _isLastBoss: 1
+  _clip: {fileID: 8300000, guid: 51a4f1157b7ff1449b5e5cf064d584c7, type: 3}
 --- !u!114 &5698500416473919617
 MonoBehaviour:
   m_ObjectHideFlags: 0

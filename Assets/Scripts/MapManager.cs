@@ -88,6 +88,8 @@ public class MapManager : MonoBehaviour
 
     public List<AudioClip> _vfx;
 
+    public AudioSource _MainBGMListener;
+
     int min;
     int sec;
 
@@ -101,6 +103,8 @@ public class MapManager : MonoBehaviour
 
     BossPattern _bossList;
     bool _BossAlive = true;
+
+    bool _isPlay = true;
 
     public int Min { get => min; set => min = value; }
     public int Sec { get => sec; set => sec = value; }
@@ -135,6 +139,7 @@ public class MapManager : MonoBehaviour
 
         _MySkill = new List<MySkillList>();
         BossList = transform.GetComponent<BossPattern>();
+        Time.timeScale = 1f;
         SetReSolution();
     }
 
@@ -148,18 +153,20 @@ public class MapManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
             LoadMap();
 
+        if (!_BossAlive)
+        {
+            if (_isPlay)
+            {
+                _uiManager.Clear();
+                _isPlay = false;
+            }
+            return;
+        }
+
         _GameTime += Time.deltaTime;
 
         min = Mathf.FloorToInt(_GameTime / 60f);
         sec = Mathf.FloorToInt(_GameTime % 60f);
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (Time.timeScale != 0)
-                Time.timeScale = 0;
-            else
-                Time.timeScale = 1f;
-        }
     }
 
     public void ChangeInterval(float _value)
@@ -177,6 +184,13 @@ public class MapManager : MonoBehaviour
             }
 
         }
+    }
+
+    public void Change_BGM(AudioClip _number)
+    {
+        _MainBGMListener.Stop();
+        _MainBGMListener.clip = _number;
+        _MainBGMListener.Play();
     }
 
     public void SetReSolution()
@@ -224,6 +238,11 @@ public class MapManager : MonoBehaviour
     }
 
     public void LoadMap()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void Home()
     {
         SceneManager.LoadScene(0);
     }

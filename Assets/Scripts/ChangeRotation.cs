@@ -41,8 +41,8 @@ public class ChangeRotation : MonoBehaviour
                 if (i > 0)
                 {
                     _spriteRenderer[i].transform.localPosition = Vector3.left;
-                    _col.offset = new Vector2(-1.311882f, 0.5185786f);
-                    _col.size = new Vector2(2.938941f, 3.591218f);
+                    _col.offset = new Vector2(-0.712515f, 0.8773994f);
+                    _col.size = new Vector2(1.514283f, 2.407949f);
                     _spriteRenderer[i].flipX = false;
                 }
             }

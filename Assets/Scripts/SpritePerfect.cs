@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class SpritePerfect : MonoBehaviour
 {
+    TitleManager _titleManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        if (_titleManager == null) _titleManager = GameObject.FindAnyObjectByType<TitleManager>();
+
         SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
         if (spriteRenderer == null)
@@ -27,6 +31,34 @@ public class SpritePerfect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //안드로이드용
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            if (Input.touchCount > 0)
+            {
+                if (_titleManager != null)
+                {
+                    if (_titleManager.Start1)
+                    {
+                        _titleManager.SceneLoad(1);
+                        _titleManager.Start1 = false;
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (_titleManager != null)
+                {
+                    if (_titleManager.Start1)
+                    {
+                        _titleManager.SceneLoad(1);
+                        _titleManager.Start1 = false;
+                    }
+                }
+            }
+        }
     }
 }

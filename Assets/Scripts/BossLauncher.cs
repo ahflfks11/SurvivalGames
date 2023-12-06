@@ -46,11 +46,14 @@ public class BossLauncher : MonoBehaviour
     public string _bossComment;
     public bool _isLastBoss;
 
+    public AudioClip _clip;
+
     public float Damage { get => _damage; set => _damage = value; }
     public bool IsAttack { get => _isAttack; set => _isAttack = value; }
 
     private void Start()
     {
+        if (_clip != null) MapManager.instance.Change_BGM(_clip);
         _Pattern = MapManager.instance.BossList.Process_BossPattern(this.gameObject, _Name);
         _RecentHP = MapManager.instance.BossList.Boss_HP(this.gameObject, _Name);
         _damage = MapManager.instance.BossList.Boss_NormalDamage(this.gameObject, _Name);
@@ -65,7 +68,19 @@ public class BossLauncher : MonoBehaviour
 
     private void Update()
     {
+        if (_AniController.GetCurrentAnimatorStateInfo(0).IsName("Death"))
+        {
+            if (_AniController.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f)
+            {
+                if (_isLastBoss)
+                    MapManager.instance.BossAlive = false;
+
+                Destroy(this.gameObject);
+            }
+        }
+
         if (!isAlive) return;
+
         if (_AniController.GetCurrentAnimatorStateInfo(0).IsName("Attack") || _AniController.GetCurrentAnimatorStateInfo(0).IsName("Teleport_Attack"))
         {
             if(_AniController.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.5f)
@@ -153,14 +168,6 @@ public class BossLauncher : MonoBehaviour
         Math.Truncate(_RecentHP);
         if (_TempDurationTime > 0) _TempDurationTime -= Time.fixedDeltaTime;
         if (_TempAttackSpeed > 0) _TempAttackSpeed -= Time.deltaTime;
-
-        if (_AniController.GetCurrentAnimatorStateInfo(0).IsName("Death"))
-        {
-            if (_AniController.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f)
-            {
-                Destroy(this.gameObject);
-            }
-        }
     }
 
     IEnumerator PatternLauncher()
@@ -246,10 +253,8 @@ public class BossLauncher : MonoBehaviour
         _tempHitTime = _hitTime;
         if (_RecentHP <= 0)
         {
-            _AniController.SetTrigger("Death");
             isAlive = false;
-            if (_isLastBoss)
-                MapManager.instance.BossAlive = false;
+            _AniController.SetTrigger("Death");
         }
     }
 
