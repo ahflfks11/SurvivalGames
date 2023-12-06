@@ -46,7 +46,7 @@ public class CharaterData : MonoBehaviour
         {
             if (_AniController.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95)
             {
-                MapManager.instance.LoadMap();
+                MapManager.instance._uiManager.DeathPanel();
             }
             return;
         }

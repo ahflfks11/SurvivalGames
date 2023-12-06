@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     public Text _EXPText;
     public Text _Battle_UIText;
     public Text _Time;
+    public Text _CongratulationText;
     public Slider _HPUI;
     public Slider _EXPUI;
 
@@ -20,6 +21,15 @@ public class UIManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         _ClearPanel.SetActive(true);
+        _CongratulationText.text = "Contratulation!";
+        _Time.text = string.Format("{0:D2}:{1:D2}", MapManager.instance.Min, MapManager.instance.Sec);
+    }
+
+    public void DeathPanel()
+    {
+        Time.timeScale = 0f;
+        _ClearPanel.SetActive(true);
+        _CongratulationText.text = "I'm Die..";
         _Time.text = string.Format("{0:D2}:{1:D2}", MapManager.instance.Min, MapManager.instance.Sec);
     }
 
