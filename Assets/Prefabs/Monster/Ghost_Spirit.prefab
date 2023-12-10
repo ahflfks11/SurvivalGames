@@ -234,10 +234,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Data:
-    _HP: 15
+    _HP: 20
     _MonsterType: 3
-    _Damage: 4
-    _Speed: 3
+    _Damage: 2
+    _Speed: 2.5
     _Resistance: 0
     SpawnLevel: 5
     SpawnLimitLevel: 0

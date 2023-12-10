@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SkillData : MonoBehaviour
 {
+    //무기 유형
     public enum WeaponType
     {
         효과없음 = 0,

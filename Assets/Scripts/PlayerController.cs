@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+
 public static class Extensions
 {
     public static T[] RemoveAt<T>(this T[] source, int index)
@@ -63,6 +64,7 @@ public class PlayerController : MonoBehaviour
         AP_DemoSpawn _spawnerConfig = null;
         GameObject _SkillPrefab = null;
 
+        //보유한 스킬이라면 능력 강화
         for (int i = 0; i < MapManager.instance._MySkill.Count; i++)
         {
             if(MapManager.instance._MySkill[i]._weapon == _weaponType)
@@ -161,6 +163,7 @@ public class PlayerController : MonoBehaviour
 
         if (_SkillPrefab == null) return false;
 
+        //보유하지 않은 스킬일 경우 리스트에 등록
         MapManager.instance.Add_Weapon(_weaponType);
 
         foreach(MapManager.SkillList _skillData in MapManager.instance._skillList)
@@ -202,11 +205,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (!_CharacterData.IsAlive) return;
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            LevelUp();
-        }
 
         if (_RecentEXP >= _ExpList[_level])
         {

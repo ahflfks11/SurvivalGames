@@ -5,20 +5,24 @@ using UnityEngine.SceneManagement;
 
 public class MapManager : MonoBehaviour
 {
+    //몬스터 종류
     public enum MonsterType
     {
         GreenSlime = 0,
         BloodSlime,
         HellDog,
-        Ghost_Spirit
+        Ghost_Spirit,
+        Wolf
     };
 
+    //아이템 종류
     public enum ItemType
     {
         Coin = 0,
         item
     };
 
+    //스킬 종류
     public enum WeaponType
     {
         NormalAttack = 0,
@@ -38,6 +42,7 @@ public class MapManager : MonoBehaviour
         CoolDown
     };
 
+    //스킬 세부 정보
     [System.Serializable]
     public struct Skill
     {
@@ -50,6 +55,7 @@ public class MapManager : MonoBehaviour
         public float _CoolTime;
     }
 
+    //스킬 종류
     [System.Serializable]
     public struct SkillList
     {
@@ -61,6 +67,7 @@ public class MapManager : MonoBehaviour
         public bool _Non_Active;
     }
 
+    //보유한 스킬 리스트
     [System.Serializable]
     public struct MySkillList
     {

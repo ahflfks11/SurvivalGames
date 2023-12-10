@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//캐릭터 정보
 [System.Serializable]
 public struct CharacterStat
 {
@@ -42,6 +43,7 @@ public class CharaterData : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //죽었을 경우 아무것도 처리하지 않는다.
         if (_AniController.GetCurrentAnimatorStateInfo(0).IsName("Death"))
         {
             if (_AniController.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95)
@@ -51,6 +53,7 @@ public class CharaterData : MonoBehaviour
             return;
         }
 
+        //공격받았을 경우 일정 텀을 두고 공격을 받도록 한다.
         if (_tempDurationTime > 0) _tempDurationTime -= Time.deltaTime;
 
         if (_playerController.MoveDir.sqrMagnitude != 0)
@@ -74,6 +77,7 @@ public class CharaterData : MonoBehaviour
         }
     }
 
+    //체력 회복
     public void Healing(float _Heal)
     {
         if (_playerController._RecentHP + _Heal <= _playerController._MaxHP)
@@ -82,6 +86,7 @@ public class CharaterData : MonoBehaviour
             _playerController._RecentHP = _playerController._MaxHP;
     }
 
+    //공격 받았을 시
     public void HitDamage(float _dmg)
     {
         _playerController._RecentHP -= _dmg;

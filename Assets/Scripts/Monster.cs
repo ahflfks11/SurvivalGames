@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//몬스터의 정보
 [System.Serializable]
 public struct Data
 {
@@ -46,7 +47,6 @@ public class Monster : MonoBehaviour
         _rigid = transform.GetComponent<Rigidbody2D>();
         _AniController = transform.GetComponent<Animator>();
         _myAudio = transform.GetComponent<AudioSource>();
-        //Coin
         MF_AutoPool.InitializeSpawn(MapManager.instance.items[0].gameObject, 0, 0);
     }
 
@@ -85,6 +85,8 @@ public class Monster : MonoBehaviour
     private void LateUpdate()
     {
         Math.Truncate(_RecentHP);
+
+        //오브젝트 방향 회전
         if (MapManager.instance._player.Rigid.position.x > _rigid.position.x)
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         else
