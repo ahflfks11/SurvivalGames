@@ -39,7 +39,8 @@ public class MapManager : MonoBehaviour
         Passive_Damage,
         bomb,
         WeaponAttack,
-        CoolDown
+        CoolDown,
+        Health_Regen
     };
 
     //스킬 세부 정보

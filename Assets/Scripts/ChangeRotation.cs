@@ -13,11 +13,6 @@ public class ChangeRotation : MonoBehaviour
         _col = transform.GetComponent<BoxCollider2D>();
     }
 
-    private void OnEnable()
-    {
-        
-    }
-
     private void Update()
     {
         if (MapManager.instance._player.CharacterData.IsRight)
